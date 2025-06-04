@@ -1,0 +1,53 @@
+services:
+  web:
+    context: ./docker/apache2
+    container_name: devquest-web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/var/www/html
+    networks:
+      - devquest-net
+    depends_on:
+      - db
+
+  api:
+    context: ./docker/apache2
+    container_name: devquest-api
+    ports:
+      - "8081:80"
+    volumes:
+      - ./api:/var/www/html
+    networks:
+      - devquest-net
+
+  cdn:
+    image: nginx:alpine
+    container_name: devquest-cdn
+    ports:
+      - "8082:80"
+    volumes:
+      - ./assets:/usr/share/nginx/html:ro
+    networks:
+      - devquest-net
+
+  db:
+    image: mysql:8.0
+    container_name: devquest-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: devquest
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+    volumes:
+      - devquest-db-data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - devquest-net
+
+volumes:
+  devquest-db-data:
+
+networks:
+  devquest-net:
