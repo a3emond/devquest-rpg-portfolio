@@ -31,3 +31,19 @@ jobs:
       - name: Deploy CDN assets
         run: |
           rsync -avz ./assets/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
+
+      - name: Run Composer install and autoload dump (frontend)
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd ${{ secrets.DEPLOY_FRONTEND_PATH }}
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            composer dump-autoload -o
+          EOF
+
+      # - name: Run Composer install and autoload dump (API - future use)
+      #   run: |
+      #     ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+      #       cd ${{ secrets.DEPLOY_API_PATH }}
+      #       composer install --no-interaction --prefer-dist --optimize-autoloader
+      #       composer dump-autoload -o
+      #     EOF
