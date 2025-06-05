@@ -1,0 +1,22 @@
+{
+    "name": "a3emond/devquest",
+    "description": "interactive portfolio 16 bit rpg style",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "A3emond\\Devquest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexandre Emond"
+        }
+    ],
+    "minimum-stability": "stable"
+}

@@ -1,6 +1,7 @@
 services:
   web:
-    context: ./docker/apache2
+    build:
+      context: ./docker/apache2
     container_name: devquest-web
     ports:
       - "8080:80"
@@ -12,7 +13,8 @@ services:
       - db
 
   api:
-    context: ./docker/apache2
+    build:
+      context: ./docker/apache2
     container_name: devquest-api
     ports:
       - "8081:80"
