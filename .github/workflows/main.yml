@@ -32,18 +32,15 @@ jobs:
         run: |
           rsync -avz ./assets/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
 
-      - name: Run Composer install and autoload dump (frontend)
+      - name: Run Composer install and autoload dump (frontend in Docker)
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd ${{ secrets.DEPLOY_FRONTEND_PATH }}
-            composer install --no-interaction --prefer-dist --optimize-autoloader
-            composer dump-autoload -o
+            docker exec ${{ secrets.DOCKER_CONTAINER_NAME }} sh -c "cd ${{ secrets.CONTAINER_FRONTEND_PATH }} && composer install --no-interaction --prefer-dist --optimize-autoloader && composer dump-autoload -o"
           EOF
 
-      # - name: Run Composer install and autoload dump (API - future use)
+      # - name: Run Composer install and autoload dump (API in Docker - future use)
       #   run: |
       #     ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-      #       cd ${{ secrets.DEPLOY_API_PATH }}
-      #       composer install --no-interaction --prefer-dist --optimize-autoloader
-      #       composer dump-autoload -o
+      #       docker exec ${{ secrets.DOCKER_CONTAINER_NAME }} sh -c "cd ${{ secrets.CONTAINER_API_PATH }} && composer install --no-interaction --prefer-dist --optimize-autoloader && composer dump-autoload -o"
       #     EOF
+
