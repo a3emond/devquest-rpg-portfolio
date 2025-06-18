@@ -1,0 +1,208 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Maps/devquestWorld.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "Maps/10_Vehicles_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/11_Camping_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/12_Hotel_and_Hospital_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/13_School_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/14_Swimming_Pool_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/15_Police_Station_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/16_Office_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/17_Garden_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/18_Fire_Station_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/19_Graveyard_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/20_Subway_and_Train_Station_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/21_Beach_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/22_Post_Office_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/23_MIlitary_Base_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/3_City_Props_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/4_Generic_Buildings_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/5_Floor_Modular_Buildings_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/6_Garage_Sales_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/7_Villas_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/8_Worksite_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/9_Shopping_Center_and_Markets_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Maps/devquestWorld.tmx": {
+            "scale": 0.0625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 4352,
+                "y": 6040
+            }
+        },
+        "Maps/devquestWorld.tmx#2_City_Terrains_32x32": {
+            "dynamicWrapping": false
+        },
+        "Tilesets/processed_tilesets/10_Vehicles_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/11_Camping_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/12_Hotel_and_Hospital_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/13_School_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/14_Swimming_Pool_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/15_Police_Station_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/16_Office_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/17_Garden_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/18_Fire_Station_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/19_Graveyard_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/1_Terrains_and_Fences_32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/processed_tilesets/20_Subway_and_Train_Station_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/21_Beach_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/22_Post_Office_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/23_MIlitary_Base_32x32.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/processed_tilesets/2_City_Terrains_32x32.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/processed_tilesets/3_City_Props_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/4_Generic_Buildings_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/5_Floor_Modular_Buildings_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/6_Garage_Sales_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/7_Villas_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/8_Worksite_32x32.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/processed_tilesets/9_Shopping_Center_and_Markets_32x32.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "last.externalTilesetPath": "/home/a3emond/dev/devquest/assets/Tilesets/processed_tilesets",
+    "last.imagePath": "/home/a3emond/dev/devquest/assets/Tilesets/ME_Theme_Sorter_32x32",
+    "map.height": 240,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 240,
+    "openFiles": [
+        "Maps/devquestWorld.tmx"
+    ],
+    "project": "devquest.tiled-project",
+    "recentFiles": [
+        "Maps/devquestWorld.tmx",
+        "Tilesets/processed_tilesets/23_MIlitary_Base_32x32.tsx",
+        "Maps/23_MIlitary_Base_32x32.tsx",
+        "Maps/22_Post_Office_32x32.tsx",
+        "Maps/21_Beach_32x32.tsx",
+        "Maps/20_Subway_and_Train_Station_32x32.tsx",
+        "Maps/19_Graveyard_32x32.tsx",
+        "Maps/18_Fire_Station_32x32.tsx",
+        "Maps/17_Garden_32x32.tsx",
+        "Maps/16_Office_32x32.tsx",
+        "Maps/15_Police_Station_32x32.tsx",
+        "Maps/14_Swimming_Pool_32x32.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx"
+}
