@@ -6,8 +6,21 @@
     "activeFile": "Maps/devquestWorld.tmx",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
+            "scaleInDock": 0.5
+        },
+        "#1_Terrains_and_Fences_32x32": {
+            "scaleInDock": 1
+        },
+        "#2_City_Terrains_32x32": {
+            "scaleInDock": 1
+        },
+        "#3_City_Props_32x32": {
+            "scaleInDock": 1
+        },
+        "#4_Generic_Buildings_32x32": {
             "scaleInDock": 1
         },
         "Maps/10_Vehicles_32x32.tsx": {
@@ -95,15 +108,79 @@
             "scaleInEditor": 1
         },
         "Maps/devquestWorld.tmx": {
-            "scale": 0.0625,
-            "selectedLayer": 0,
+            "scale": 0.33,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 4352,
-                "y": 6040
+                "x": 645.4545454545455,
+                "y": 1010.6060606060605
             }
         },
+        "Maps/devquestWorld.tmx#10_Vehicles_32x32": {
+            "scaleInDock": 1.5
+        },
+        "Maps/devquestWorld.tmx#12_Hotel_and_Hospital_32x32": {
+            "scaleInDock": 0.33
+        },
+        "Maps/devquestWorld.tmx#13_School_32x32": {
+            "scaleInDock": 0.75
+        },
+        "Maps/devquestWorld.tmx#14_Swimming_Pool_32x32": {
+            "scaleInDock": 1
+        },
+        "Maps/devquestWorld.tmx#15_Police_Station_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#16_Office_32x32": {
+            "scaleInDock": 0.75
+        },
+        "Maps/devquestWorld.tmx#17_Garden_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#18_Fire_Station_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#19_Graveyard_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#1_Terrains_and_Fences_32x32": {
+            "scaleInDock": 1
+        },
+        "Maps/devquestWorld.tmx#20_Subway_and_Train_Station_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#21_Beach_32x32": {
+            "scaleInDock": 1
+        },
+        "Maps/devquestWorld.tmx#22_Post_Office_32x32": {
+            "scaleInDock": 1
+        },
+        "Maps/devquestWorld.tmx#23_MIlitary_Base_32x32": {
+            "scaleInDock": 0.25
+        },
         "Maps/devquestWorld.tmx#2_City_Terrains_32x32": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Maps/devquestWorld.tmx#3_City_Props_32x32": {
+            "scaleInDock": 0.75
+        },
+        "Maps/devquestWorld.tmx#4_Generic_Buildings_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#5_Floor_Modular_Buildings_32x32": {
+            "scaleInDock": 0.75
+        },
+        "Maps/devquestWorld.tmx#6_Garage_Sales_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#7_Villas_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#8_Worksite_32x32": {
+            "scaleInDock": 0.5
+        },
+        "Maps/devquestWorld.tmx#9_Shopping_Center_and_Markets_32x32": {
+            "scaleInDock": 0.5
         },
         "Tilesets/processed_tilesets/10_Vehicles_32x32.tsx": {
             "scaleInDock": 1
@@ -136,6 +213,7 @@
             "scaleInDock": 1
         },
         "Tilesets/processed_tilesets/1_Terrains_and_Fences_32x32.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -182,9 +260,9 @@
     },
     "last.externalTilesetPath": "/home/a3emond/dev/devquest/assets/Tilesets/processed_tilesets",
     "last.imagePath": "/home/a3emond/dev/devquest/assets/Tilesets/ME_Theme_Sorter_32x32",
-    "map.height": 240,
+    "map.height": 64,
     "map.lastUsedFormat": "tmx",
-    "map.width": 240,
+    "map.width": 64,
     "openFiles": [
         "Maps/devquestWorld.tmx"
     ],
@@ -203,6 +281,7 @@
         "Maps/15_Police_Station_32x32.tsx",
         "Maps/14_Swimming_Pool_32x32.tsx"
     ],
+    "tileset.embedInMap": true,
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx"
 }
