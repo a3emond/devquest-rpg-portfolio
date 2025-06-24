@@ -108,11 +108,11 @@
             "scaleInEditor": 1
         },
         "Maps/devquestWorld.tmx": {
-            "scale": 0.33,
-            "selectedLayer": 3,
+            "scale": 0.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 645.4545454545455,
-                "y": 1010.6060606060605
+                "x": 1044,
+                "y": 973
             }
         },
         "Maps/devquestWorld.tmx#10_Vehicles_32x32": {
