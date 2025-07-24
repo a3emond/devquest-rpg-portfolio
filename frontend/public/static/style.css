@@ -1,0 +1,320 @@
+/* AEDev Portfolio Base Styles */
+
+:root {
+    --color-bg: #0a0a0a;
+    --color-text: #eeeeee;
+    --color-gold: #d4af37;
+    --color-gold-dark: #a17f1a;
+    --font-main: 'Poppins', 'Segoe UI', sans-serif;
+    --content-max-width: 1200px;
+    --transition-fast: 0.3s ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    height: 100vh;
+    overflow: hidden;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../assets/logo_background.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: contain;
+    opacity: 0.5; /* Try 0.03–0.1 depending on how subtle you want it */
+    z-index: 0;
+    pointer-events: none;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+h1, h2, h3 {
+    color: var(--color-gold);
+    margin-bottom: 0.5em;
+}
+
+a {
+    color: var(--color-gold);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+a:hover {
+    color: var(--color-gold-dark);
+}
+
+.container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+/* Scroll Snapping */
+.snap-container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    position: relative;
+}
+
+.snap-child {
+    scroll-snap-align: start;
+}
+
+/* Sticky Header */
+.sticky-header {
+    max-height: 110px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sticky-header.scrolled {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    height: 80px;
+}
+
+/* Social Icons */
+.header-social-icons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.header-social-icons a {
+    color: var(--color-gold);
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+.header-social-icons a:hover {
+    color: var(--color-gold-dark);
+}
+
+@media (max-width: 768px) {
+    .header-social-icons {
+        display: none; /* hide on mobile */
+    }
+}
+
+
+/* Hamburger */
+.hamburger {
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.hamburger div {
+    height: 4px;
+    background-color: var(--color-gold);
+    border-radius: 2px;
+    transition: all var(--transition-fast);
+}
+.hamburger.open div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open div:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open div:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Slide-down Menu (Dropdown) */
+.dropdown-menu {
+    position: absolute;
+    top: 280px;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: rgba(10, 10, 10, 0.95);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+}
+
+.dropdown-menu.active {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+
+.dropdown-menu a {
+    padding: 1rem 2rem;
+    color: var(--color-gold);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.dropdown-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+
+/* Buttons */
+.btn {
+    background-color: transparent;
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    padding: 0.75rem 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.btn:hover {
+    background-color: var(--color-gold);
+    color: var(--color-bg);
+    box-shadow: 0 0 10px var(--color-gold);
+}
+
+/* Form Inputs */
+input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 4px;
+    background: #1a1a1a;
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Scrollspy Highlight */
+.dropdown-menu a.active {
+    color: var(--color-gold-dark);
+    text-decoration: underline;
+}
+/* Hide vertical scrollbar */
+.snap-container {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+.snap-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+/* Down arrow button */
+.scroll-down-btn {
+    position: fixed;
+    bottom: 80px;
+    left: 90%;
+    transform: translateX(-50%);
+    z-index: 50;
+    background-color: var(--color-gold);
+    color: var(--color-bg);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    transition: opacity 0.3s ease;
+    animation: bounce 2s infinite;
+}
+
+.scroll-down-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+.site-footer {
+    text-align: center;
+    background-color: #0a0a0a;
+    color: var(--color-text);
+}
+
+.footer-social-icons {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.footer-social-icons a {
+    color: var(--color-gold);
+    font-size: 1rem;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.footer-social-icons a:hover {
+    color: var(--color-gold-dark);
+    transform: scale(1.2);
+}

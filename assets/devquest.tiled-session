@@ -111,8 +111,8 @@
             "scale": 0.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1044,
-                "y": 973
+                "x": 1106,
+                "y": 991
             }
         },
         "Maps/devquestWorld.tmx#10_Vehicles_32x32": {
@@ -177,7 +177,7 @@
             "scaleInDock": 0.5
         },
         "Maps/devquestWorld.tmx#8_Worksite_32x32": {
-            "scaleInDock": 0.5
+            "scaleInDock": 1.5
         },
         "Maps/devquestWorld.tmx#9_Shopping_Center_and_Markets_32x32": {
             "scaleInDock": 0.5
