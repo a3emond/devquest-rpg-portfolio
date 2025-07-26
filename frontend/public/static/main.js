@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateScrollState() {
         const scrollY = snapContainer.scrollTop;
+        const footer = document.querySelector(".site-footer");
         let current = "";
 
         // Scrollspy
@@ -70,26 +71,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Header shadow
+        // Header shadow toggle
         if (scrollY > 20) {
             header.classList.add("scrolled");
         } else {
             header.classList.remove("scrolled");
         }
 
-        // Auto-hide header when scrolling down
-        if (scrollY > lastScrollTop && scrollY > 100) {
-            header.style.transform = "translateY(-100%)";
-        }
+        // Immediately hide on scroll
+        header.style.transform = "translateY(-100%)";
+        footer.style.transform = "translateY(100%)";
 
-        // Reset scroll timeout to show header again after stopping scroll
+        // Clear and restart timeout for showing after scrolling stops
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
             header.style.transform = "translateY(0)";
-        }, 250);
+            footer.style.transform = "translateY(0)";
+        }, 100);
 
         lastScrollTop = scrollY;
     }
+
 
 
     snapContainer.addEventListener("scroll", updateScrollState);
