@@ -131,4 +131,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    const scrollUpBtn = document.getElementById("scrollUpBtn");
+
+    // Scroll to previous section
+    scrollUpBtn.addEventListener("click", () => {
+        const scrollY = snapContainer.scrollTop;
+        const reversedSections = Array.from(sections).reverse();
+        const previousSection = reversedSections.find(section => section.offsetTop < scrollY - 10);
+        if (previousSection) {
+            snapContainer.scrollTo({
+                top: previousSection.offsetTop,
+                behavior: "smooth"
+            });
+        }
+    });
+
+
+    // Show/hide scroll-up button when not at top
+    snapContainer.addEventListener("scroll", () => {
+        const currentScroll = snapContainer.scrollTop;
+
+        if (currentScroll > 300) {
+            scrollUpBtn.classList.remove("hidden");
+        } else {
+            scrollUpBtn.classList.add("hidden");
+        }
+    });
+
+
 });

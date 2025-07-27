@@ -13,7 +13,7 @@
     --font-main: 'Poppins', 'Segoe UI', sans-serif;
     --content-max-width: 700px;
     --transition-fast: 0.3s ease-in-out;
-    --header-height: 110px;
+    --header-height: 80px;
 }
 
 * {
@@ -25,7 +25,7 @@
 body {
     background-color: var(--color-bg-section);
     color: var(--color-text);
-    font-family: var(--font-main);
+    font-family: var(--font-main), serif;
     line-height: 1.6;
     scroll-behavior: smooth;
     height: 100vh;
@@ -97,6 +97,10 @@ a:hover {
     width: 100%;
     height: 100%;
     gap: 2rem;
+    max-height: calc(100vh - var(--header-height) - 40px); /* 40px ≈ footer height + some spacing */
+    overflow-y: auto;
+    padding-bottom: 1rem; /* ensure inner scroll content is not clipped */
+    overscroll-behavior: contain; /* avoid scroll chaining */
 }
 
 /* Actual content area */
@@ -127,6 +131,9 @@ a:hover {
 
 /* === Desktop Adjustments === */
 @media (min-width: 1024px) {
+    .section {
+        padding-left: 10vw;
+    }
     .section.narrow .section-inner {
         flex-direction: row;
         align-items: center; /* Vertical centering */
@@ -136,7 +143,6 @@ a:hover {
 
     .section.narrow .section-content {
         max-width: 40%;
-        margin-left: 5vw;
     }
 
     body::before {
@@ -191,7 +197,7 @@ a:hover {
 
 /* Header */
 .sticky-header {
-    max-height: var(--header-height);
+    height: var(--header-height);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -379,6 +385,7 @@ input:hover, textarea:hover {
     transform: translateY(0);
 }
 
+/* Scroll Down Button */
 .scroll-down-btn {
     position: fixed;
     bottom: 80px;
@@ -407,6 +414,36 @@ input:hover, textarea:hover {
     50% { transform: translateX(-50%) translateY(-10px); }
 }
 
+/* Scroll Up Button */
+.scroll-up-btn {
+    position: fixed;
+    bottom: 160px; /* Slightly above the down arrow */
+    left: 90%;
+    transform: translateX(-50%);
+    z-index: 50;
+    background: var(--color-gold);
+    color: var(--color-bg);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    animation: bounce-up 2s infinite;
+}
+
+.scroll-up-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes bounce-up {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* --- Footer --- */
 .site-footer {
     position: fixed;
     bottom: 0;

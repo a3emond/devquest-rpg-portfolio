@@ -91,6 +91,9 @@
     </section>
 
 </main>
+<button class="scroll-up-btn hidden" id="scrollUpBtn" aria-label="Scroll up">
+    <i class="fas fa-chevron-up"></i>
+</button>
 
 <button class="scroll-down-btn" id="scrollDownBtn" aria-label="Scroll down">
     <i class="fas fa-chevron-down"></i>
