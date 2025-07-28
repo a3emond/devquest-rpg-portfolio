@@ -15,7 +15,7 @@
         <a href="#home"><img src="assets/logo_header.png" alt="AEDev Logo" class="logo" /></a>
         <div class="header-social-icons">
             <a href="https://github.com/a3emond" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/a3emond" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/alexandre-emond-2750492a7" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             <a href="mailto:admin@aedev.pro" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
         <div class="hamburger" id="hamburger">
@@ -102,7 +102,7 @@
 <footer class="site-footer">
     <div class="footer-social-icons">
         <a href="https://github.com/a3emond" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/a3emond" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/alexandre-emond-2750492a7 " target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
         <a href="mailto:admin@aedev.pro" aria-label="Email"><i class="fas fa-envelope"></i></a>
     </div>
     <div>&copy; 2025 AEDev — Alexandre Émond</div>

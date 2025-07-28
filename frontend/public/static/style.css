@@ -16,6 +16,10 @@
     --header-height: 80px;
 }
 
+html {
+    scroll-padding-top: var(--header-height);
+}
+
 * {
     margin: 0;
     padding: 0;
