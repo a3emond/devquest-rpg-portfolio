@@ -59,7 +59,25 @@
         <div class="section-inner">
             <div class="section-content">
                 <h2>Projects</h2>
-                <p>Showcase coming soon...</p>
+
+                <div class="flip-carousel">
+                    <!-- Injected via JS -->
+                    <div class="flip-overlay-hint">← drag or use ↻</div>
+
+                    <div class="flip-card" id="flipCard">
+                        <div class="flip-card-inner" id="cardInner">
+                            <div class="flip-card-front" id="cardFront"></div>
+                            <div class="flip-card-back" id="cardBack"></div>
+                        </div>
+                    </div>
+
+                    <!-- Injected via JS -->
+                    <button class="flip-hint-btn" id="manualFlipBtn">↻</button>
+
+                    <div class="carousel-controls">
+                        <div class="flip-dots" id="dotsContainer"></div>
+                    </div>
+                </div>
             </div>
             <div class="section-bg-space"></div>
         </div>
@@ -109,5 +127,6 @@
 </footer>
 
 <script src="static/main.js"></script>
+<script src="static/flip_card.js"></script>
 </body>
 </html>
