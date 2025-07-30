@@ -35,7 +35,7 @@
 </nav>
 
 <main class="snap-container">
-    <section id="home" class="section snap-child">
+    <section id="home" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
                 <h1>AEDev</h1>
@@ -45,7 +45,7 @@
         <div class="section-bg-space"></div>
     </section>
 
-    <section id="about" class="section snap-child">
+    <section id="about" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
                 <h2>About Me</h2>
@@ -55,24 +55,20 @@
         </div>
     </section>
 
-    <section id="projects" class="section snap-child">
+    <section id="projects" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
                 <h2>Projects</h2>
 
                 <div class="flip-carousel">
-                    <!-- Injected via JS -->
-                    <div class="flip-overlay-hint">← drag or use ↻</div>
-
                     <div class="flip-card" id="flipCard">
                         <div class="flip-card-inner" id="cardInner">
                             <div class="flip-card-front" id="cardFront"></div>
                             <div class="flip-card-back" id="cardBack"></div>
                         </div>
-                    </div>
 
-                    <!-- Injected via JS -->
-                    <button class="flip-hint-btn" id="manualFlipBtn">↻</button>
+                        <button class="flip-hint-btn" id="manualFlipBtn">↻</button>
+                    </div>
 
                     <div class="carousel-controls">
                         <div class="flip-dots" id="dotsContainer"></div>
@@ -83,7 +79,9 @@
         </div>
     </section>
 
-    <section id="skills" class="section snap-child">
+
+
+    <section id="skills" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
                 <h2>Skills</h2>

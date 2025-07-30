@@ -500,6 +500,28 @@ input:hover, textarea:hover {
     position: relative;
 }
 
+/* ↻ button aligned to top-right corner of card, just outside */
+.flip-hint-btn {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    z-index: 15;
+    background: var(--color-gold);
+    color: var(--color-bg);
+    border: none;
+    font-size: 1rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: background 0.3s, transform 0.2s;
+}
+.flip-hint-btn:hover {
+    background: var(--color-gold-dark);
+    transform: scale(1.05);
+}
+
+/* Card inner 3D flip container */
 .flip-card-inner {
     width: 100%;
     height: 100%;
@@ -532,10 +554,30 @@ input:hover, textarea:hover {
     border-radius: 8px;
 }
 
+/* ← drag or use ↻ HINT placed INSIDE the card */
+.flip-overlay-hint {
+    font-size: 0.9rem;
+    color: var(--color-card-text);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    margin-top: 0.6rem;
+    animation: pulse-hint 2.2s infinite ease-in-out;
+    align-self: center;
+    opacity: 0.85;
+}
+
+@keyframes pulse-hint {
+    0%   { opacity: 0.3; transform: scale(1); }
+    50%  { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 0.3; transform: scale(1); }
+}
+
 .flip-card-back {
     transform: rotateY(180deg);
 }
 
+/* Dots */
 .flip-dots {
     display: flex;
     gap: 0.5rem;
@@ -550,7 +592,6 @@ input:hover, textarea:hover {
     transition: opacity 0.3s;
     cursor: pointer;
 }
-
 .flip-dot.active {
     opacity: 1;
     background: var(--color-gold);
@@ -567,57 +608,27 @@ input:hover, textarea:hover {
     display: inline-block;
 }
 
-/* Overlay hint */
-.flip-overlay-hint {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--color-card-text);
-    padding: 0.5rem 1.2rem;
-    border-radius: 12px;
-    pointer-events: none;
-    z-index: 10;
-    animation: pulse-hint 3s infinite;
-    white-space: nowrap;
+/* Project logo inside card */
+.project-logo {
+    max-height: 150px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
 }
 
-@keyframes pulse-hint {
-    0% { opacity: 0.2; }
-    50% { opacity: 0.85; }
-    100% { opacity: 0.2; }
+/* Optional: wrapper if needed for alignment but not used here */
+.flip-controls-wrapper {
+    display: none; /* not used anymore */
 }
 
+
+/* Optional: hide overlay hint on small screen if desired */
 @media (max-width: 768px) {
-    .flip-overlay-hint {
+    .flip-controls-wrapper .flip-overlay-hint {
         display: none;
     }
 }
 
-/* Manual flip button */
-.flip-hint-btn {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 11;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: var(--color-card-text);
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    cursor: pointer;
-    backdrop-filter: blur(6px);
-    transition: background 0.3s, transform 0.2s;
-}
-
-.flip-hint-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateX(-50%) scale(1.05);
-}
 .project-logo {
     max-height: 150px;
     object-fit: contain;
