@@ -479,6 +479,8 @@ input:hover, textarea:hover {
     color: var(--color-gold-dark);
     transform: scale(1.2);
 }
+
+
 .flip-carousel {
     display: flex;
     flex-direction: column;
@@ -488,6 +490,14 @@ input:hover, textarea:hover {
     height: 100%;
     perspective: 1000px;
     position: relative;
+}
+.flip-carousel,
+.flip-carousel * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
 }
 
 .flip-card {

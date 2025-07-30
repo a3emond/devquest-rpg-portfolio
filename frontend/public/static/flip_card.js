@@ -47,7 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
         })).then(() => buffer);
     }
 
-    function initFlipCard(projectImages) {
+    preloadImages(projects).then(projectImages => {
+        initFlipCard(projects, projectImages);
+    });
+
+    function initFlipCard(projects, projectImages) {
         let current = 0;
         let isDragging = false;
         let startX = 0;
@@ -56,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let isAutoFlipping = false;
         let lastInteractionTime = Date.now();
         let autoFlipInterval;
+        let swipeStartTime = 0;
 
         const flipCard = document.getElementById("flipCard");
         const cardInner = document.getElementById("cardInner");
@@ -66,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function buildCardContent(container, project) {
             container.innerHTML = "";
-
             const title = document.createElement("h3");
             title.textContent = project.name;
 
@@ -86,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const image = projectImages.get(project.name);
             container.appendChild(title);
             container.appendChild(image);
-            container.appendChild(hint)
+            container.appendChild(hint);
             container.appendChild(desc);
             container.appendChild(link);
         }
@@ -98,19 +102,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             cardInner.style.transform = `rotateY(${rotationDeg}deg)`;
 
-            // Only update flippingTo and back face if threshold passed
             if (absRotation > 90 && flippingTo !== (direction === 1 ? "next" : "prev")) {
                 buildCardContent(back, projects[targetIndex]);
                 flippingTo = direction === 1 ? "next" : "prev";
             } else if (absRotation <= 90) {
-                flippingTo = null; // cancel flip intent
+                flippingTo = null;
             }
         }
 
-
         function finishFlip() {
             if (!flippingTo) {
-                // Not enough drag to commit flip — reset
                 cardInner.style.transition = "transform 0.6s ease-in-out";
                 cardInner.style.transform = "rotateY(0deg)";
                 setTimeout(() => cardInner.style.transition = "none", 600);
@@ -129,21 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => cardInner.style.transition = "none", 600);
 
             updateDots(current);
-            flippingTo = null; // reset state
-        }
-
-
-        function showProject(index, direction = 1) {
-            current = (index + projects.length) % projects.length;
-            buildCardContent(front, projects[current]);
-            buildCardContent(back, projects[(current + 1) % projects.length]);
-            cardInner.style.transition = "transform 2s ease-in-out";
-            cardInner.style.transform = `rotateY(${direction === 1 ? 180 : -180}deg)`;
-            setTimeout(() => {
-                cardInner.style.transition = "none";
-                cardInner.style.transform = "rotateY(0deg)";
-                updateDots(current);
-            }, 2000);
+            flippingTo = null;
         }
 
         function startAutoFlip() {
@@ -189,12 +176,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        let ignoreNextMouseUp = false;
-
         manualBtn.addEventListener("click", () => {
-            ignoreNextMouseUp = true;
             resetAutoFlipTimer();
-
             if (isAutoFlipping) return;
 
             isAutoFlipping = true;
@@ -202,11 +185,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             buildCardContent(back, projects[nextIndex]);
 
-            // Flip to 180°
             cardInner.style.transition = "transform 0.6s ease-in-out";
             cardInner.style.transform = "rotateY(180deg)";
 
-            // At halfway (300ms), swap front/back content
             setTimeout(() => {
                 current = nextIndex;
                 buildCardContent(front, projects[current]);
@@ -218,40 +199,64 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 600);
         });
 
-        flipCard.addEventListener("mousedown", (e) => {
-            isDragging = true;
-            startX = e.clientX;
+        // -------------------------------
+        // Mouse-based drag interaction
+        // -------------------------------
+        let dragStartX = 0;
+        let dragDeltaX = 0;
+        let dragging = false;
+
+        function clearDrag() {
+            dragging = false;
+            dragStartX = 0;
+            dragDeltaX = 0;
+        }
+
+// Start drag anywhere inside the section
+        const flipArea = document.querySelector(".flip-carousel");
+        flipArea.addEventListener("mousedown", (e) => {
+            dragging = true;
+            dragStartX = e.clientX;
+            dragDeltaX = 0;
             cardInner.style.transition = "none";
             resetAutoFlipTimer();
         });
 
+// Track horizontal drag (global)
         document.addEventListener("mousemove", (e) => {
-            if (!isDragging) return;
-            const deltaX = e.clientX - startX;
-            currentRotation = deltaX * 0.2;
+            if (!dragging) return;
+            dragDeltaX = e.clientX - dragStartX;
+            currentRotation = dragDeltaX * 0.2;
             currentRotation = Math.max(Math.min(currentRotation, 180), -180);
             updateFaces(currentRotation);
         });
 
+// On mouse up: decide to flip or reset
         document.addEventListener("mouseup", () => {
-            if (!isDragging) return;
-            isDragging = false;
-            if (Math.abs(currentRotation) > 90) {
+            if (!dragging) return;
+            dragging = false;
+
+            const fastSwipe = Math.abs(dragDeltaX) > 60;
+            if (fastSwipe) {
                 finishFlip();
             } else {
-                cardInner.style.transition = "transform 2s ease-in-out";
+                cardInner.style.transition = "transform 0.6s ease-in-out";
                 cardInner.style.transform = "rotateY(0deg)";
-                setTimeout(() => cardInner.style.transition = "none", 2000);
+                setTimeout(() => cardInner.style.transition = "none", 600);
             }
+
+            clearDrag();
         });
 
-        // -----------------------
-        // Touch events for mobile
-        // -----------------------
+
+        // -------------------------------
+        // Touch-based drag interaction
+        // -------------------------------
 
         flipCard.addEventListener("touchstart", (e) => {
             isDragging = true;
             startX = e.touches[0].clientX;
+            swipeStartTime = Date.now();
             cardInner.style.transition = "none";
             resetAutoFlipTimer();
         });
@@ -267,12 +272,17 @@ document.addEventListener("DOMContentLoaded", () => {
         flipCard.addEventListener("touchend", () => {
             if (!isDragging) return;
             isDragging = false;
-            if (Math.abs(currentRotation) > 90) {
+            const swipeDuration = Date.now() - swipeStartTime;
+            const velocity = Math.abs(currentRotation) / swipeDuration;
+            const farEnough = Math.abs(currentRotation) > 90;
+            const fastSwipe = velocity > 0.5;
+
+            if (fastSwipe || farEnough) {
                 finishFlip();
             } else {
-                cardInner.style.transition = "transform 2s ease-in-out";
+                cardInner.style.transition = "transform 0.6s ease-in-out";
                 cardInner.style.transform = "rotateY(0deg)";
-                setTimeout(() => cardInner.style.transition = "none", 2000);
+                setTimeout(() => cardInner.style.transition = "none", 600);
             }
         });
 
@@ -281,8 +291,4 @@ document.addEventListener("DOMContentLoaded", () => {
         setupDots();
         startAutoFlip();
     }
-
-    preloadImages(projects).then(projectImages => {
-        initFlipCard(projectImages);
-    });
 });
