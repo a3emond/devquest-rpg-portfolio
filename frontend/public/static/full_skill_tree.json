@@ -1,0 +1,212 @@
+{
+  "name": "AEDev Skill Tree",
+  "groups": [
+    {
+      "id": "prog_langs",
+      "label": "Programming Languages",
+      "row": 0,
+      "categoryIcon": "fa-solid fa-code",
+      "skills": ["frontend_langs", "backend_langs", "system_langs", "compiled_langs"]
+    },
+    {
+      "id": "foundations",
+      "label": "Fundamentals",
+      "row": 0,
+      "categoryIcon": "fa-solid fa-cube",
+      "skills": ["ds_core"]
+    },
+    {
+      "id": "web_backend",
+      "label": "Web & Backend Development",
+      "row": 1,
+      "categoryIcon": "fa-solid fa-server",
+      "skills": ["core_web", "data_handling", "sys_admin", "app_dev", "algorithms"]
+    },
+    {
+      "id": "infrastructure",
+      "label": "Infrastructure & Deployment",
+      "row": 2,
+      "categoryIcon": "fa-solid fa-network-wired",
+      "skills": ["web_tech", "ai_iot", "deployment", "api_payment", "design_concepts"]
+    },
+    {
+      "id": "cloud_softskills",
+      "label": "Cloud & Soft Skills",
+      "row": 3,
+      "categoryIcon": "fa-solid fa-cloud",
+      "skills": ["cloud_devops", "soft_core"]
+    }
+  ],
+  "skills": [
+    {
+      "id": "frontend_langs",
+      "label": "Frontend Stack",
+      "icon": "fa-solid fa-display",
+      "row": 0,
+      "groupId": "prog_langs",
+      "description": "Essential client-side tools.",
+      "details": ["HTML", "CSS", "JS", "TS"],
+      "unlocks": ["core_web"]
+    },
+    {
+      "id": "backend_langs",
+      "label": "Backend Stack",
+      "icon": "fa-solid fa-database",
+      "row": 0,
+      "groupId": "prog_langs",
+      "description": "General-purpose backend languages.",
+      "details": ["PHP", "Python", "SQL"],
+      "unlocks": ["data_handling"]
+    },
+    {
+      "id": "system_langs",
+      "label": "System Scripting",
+      "icon": "fa-solid fa-terminal",
+      "row": 0,
+      "groupId": "prog_langs",
+      "description": "Scripting for automation and OS.",
+      "details": ["Bash", "PowerShell"],
+      "unlocks": ["sys_admin"]
+    },
+    {
+      "id": "compiled_langs",
+      "label": "Compiled Languages",
+      "icon": "fa-solid fa-microchip",
+      "row": 0,
+      "groupId": "prog_langs",
+      "description": "Statically compiled high-perf. languages.",
+      "details": ["Java", "C#", "C++"],
+      "unlocks": ["app_dev"]
+    },
+    {
+      "id": "ds_core",
+      "label": "Data Structures",
+      "icon": "fa-solid fa-cubes",
+      "row": 0,
+      "groupId": "foundations",
+      "description": "Building blocks for logic.",
+      "details": ["Trees", "Hash tables", "Graphs"],
+      "unlocks": ["algorithms"]
+    },
+    {
+      "id": "core_web",
+      "label": "Core Web",
+      "icon": "fa-solid fa-globe",
+      "row": 1,
+      "groupId": "web_backend",
+      "description": "Foundational techniques for the web.",
+      "details": ["Accessibility", "Responsive", "PWAs"],
+      "unlocks": ["web_tech"]
+    },
+    {
+      "id": "data_handling",
+      "label": "Data & Reporting",
+      "icon": "fa-solid fa-chart-line",
+      "row": 1,
+      "groupId": "web_backend",
+      "description": "Work with data, insights & storage.",
+      "details": ["MySQL", "PostgreSQL", "Reports"],
+      "unlocks": ["ai_iot"]
+    },
+    {
+      "id": "sys_admin",
+      "label": "System Admin",
+      "icon": "fa-solid fa-server",
+      "row": 1,
+      "groupId": "web_backend",
+      "description": "Infrastructure and server ops.",
+      "details": ["Linux", "Virtualization", "Backups"],
+      "unlocks": ["deployment"]
+    },
+    {
+      "id": "app_dev",
+      "label": "App Development",
+      "icon": "fa-solid fa-code",
+      "row": 1,
+      "groupId": "web_backend",
+      "description": "Build apps and services.",
+      "details": ["Mobile", "Desktop", "Frameworks"],
+      "unlocks": ["api_payment"]
+    },
+    {
+      "id": "algorithms",
+      "label": "Algorithms",
+      "icon": "fa-solid fa-sitemap",
+      "row": 1,
+      "groupId": "web_backend",
+      "description": "Logic and processing patterns.",
+      "details": ["Sorting", "Recursion", "Big-O"],
+      "unlocks": ["design_concepts"]
+    },
+    {
+      "id": "web_tech",
+      "label": "Web Technologies",
+      "icon": "fa-solid fa-layer-group",
+      "row": 2,
+      "groupId": "infrastructure",
+      "description": "Support & content technologies.",
+      "details": ["CMS", "SEO", "Ecommerce"],
+      "unlocks": []
+    },
+    {
+      "id": "ai_iot",
+      "label": "AI & Automation",
+      "icon": "fa-solid fa-robot",
+      "row": 2,
+      "groupId": "infrastructure",
+      "description": "Smart systems & ML.",
+      "details": ["IoT", "AI", "Scripting"],
+      "unlocks": []
+    },
+    {
+      "id": "deployment",
+      "label": "Deployment",
+      "icon": "fa-solid fa-box-open",
+      "row": 2,
+      "groupId": "infrastructure",
+      "description": "Packaging, shipping, scaling.",
+      "details": ["Docker", "CI/CD", "Apache"],
+      "unlocks": ["cloud_devops"]
+    },
+    {
+      "id": "api_payment",
+      "label": "APIs & Payments",
+      "icon": "fa-solid fa-credit-card",
+      "row": 2,
+      "groupId": "infrastructure",
+      "description": "Service endpoints and gateways.",
+      "details": ["REST", "GraphQL", "Stripe"],
+      "unlocks": []
+    },
+    {
+      "id": "design_concepts",
+      "label": "Software Design",
+      "icon": "fa-solid fa-cogs",
+      "row": 2,
+      "groupId": "infrastructure",
+      "description": "Good structure and performance.",
+      "details": ["OOP", "Concurrency", "Patterns"],
+      "unlocks": []
+    },
+    {
+      "id": "cloud_devops",
+      "label": "Cloud & DevOps",
+      "icon": "fa-solid fa-cloud",
+      "row": 3,
+      "groupId": "cloud_softskills",
+      "description": "Automated deployments, cloud scaling.",
+      "details": ["K8s", "Scaling", "Infra as Code"],
+      "unlocks": []
+    },
+    {
+      "id": "soft_core",
+      "label": "Soft Skills",
+      "icon": "fa-solid fa-user",
+      "row": 3,
+      "groupId": "cloud_softskills",
+      "description": "Developer mindset and work ethic.",
+      "details": ["Teamwork", "Critical thinking", "Mentorship"],
+      "unlocks": []
+    }
+  ]
+}

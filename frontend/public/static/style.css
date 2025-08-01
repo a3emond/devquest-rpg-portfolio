@@ -14,6 +14,8 @@
     --content-max-width: 700px;
     --transition-fast: 0.3s ease-in-out;
     --header-height: 80px;
+    --footer-height: 30px;
+    --section-gap: 2rem;
 }
 
 html {
@@ -82,36 +84,37 @@ a:hover {
     padding: 2rem;
 }
 
-/* Sections */
-/* === Section Layout === */
+/* === Section Base Layout === */
 .section {
-    min-height: 100vh;
+    height: 100vh;
+    padding-top: var(--header-height);
+    padding-bottom: var(--footer-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 5rem 2rem 2rem;
+    overflow: hidden;
 }
 
-/* Inner wrapper to control content + background spacing */
+/* === Inner container that centers the content === */
 .section-inner {
+    flex: 1;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
+    gap: var(--section-gap);
     width: 100%;
-    height: 100%;
-    gap: 2rem;
-    max-height: calc(100vh - var(--header-height) - 40px); /* 40px ≈ footer height + some spacing */
-    overflow-y: auto;
-    padding-bottom: 1rem; /* ensure inner scroll content is not clipped */
-    overscroll-behavior: contain; /* avoid scroll chaining */
+    max-width: 100%;
+    overflow: hidden;
 }
 
-/* Actual content area */
+/* === Main content area inside a section === */
 .section-content {
     flex: 1;
     max-width: var(--content-max-width);
+    overflow: visible;
 }
+
 
 /* Optional blank/right space for background visibility */
 .section-bg-space {
@@ -161,7 +164,7 @@ a:hover {
         justify-content: flex-start;
         align-items: center;
         text-align: center;
-        padding-top: 7rem;
+        margin: 0;
     }
 
     .section-inner {
@@ -170,7 +173,7 @@ a:hover {
     }
 
     .section-content {
-        max-width: 90%;
+        max-width: 100%;
     }
 
     .section-bg-space {
@@ -185,7 +188,7 @@ a:hover {
 /* Snap Scroll */
 .snap-container {
     scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100vh;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -198,6 +201,7 @@ a:hover {
 .snap-child {
     scroll-snap-align: start;
 }
+
 
 /* Header */
 .sticky-header {
@@ -451,17 +455,20 @@ input:hover, textarea:hover {
 .site-footer {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
+    height: var(--footer-height);
     background: var(--color-bg);
     color: var(--color-text);
     font-size: 0.85rem;
-    padding: 0.3rem 1rem;
+    padding: 0 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
 }
 
 .footer-social-icons {
@@ -644,4 +651,201 @@ input:hover, textarea:hover {
     object-fit: contain;
     border-radius: 8px;
     margin-bottom: 1rem;
+}
+
+
+
+
+/* Skill Tree Container */
+.skill-section {
+    position: relative;
+    overflow: visible; /* Just in case */
+}
+
+.skill-tree-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#skill-tree {
+    position: relative;
+    min-width: 350px;
+    width: 100%;
+    height: 720px;
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+
+
+/* SVG Lines Container */
+.skill-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+/* Skill card (node) */
+.skill-card {
+    position: absolute;
+    aspect-ratio: 1 / 1;
+    width: clamp(60px, 8vw, 100px);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(18px, 2vw, 24px);
+    cursor: pointer;
+    z-index: 2;
+    transition: transform 0.2s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.skill-card:hover {
+    transform: scale(1.05);
+}
+
+
+/* Skill group label */
+.skill-group-label {
+    position: absolute;
+    left: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #888;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* Category Backgrounds */
+.skill-zone {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.08;
+    pointer-events: none;
+    background: transparent;
+    /*background-size: contain;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    border-radius: 50%;
+}
+
+/* SVG container tweak */
+svg#skill-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+/*!* Zoom container for panning *!*/
+/*.skill-zoom-container {*/
+/*    transform-origin: center center;*/
+/*    transition: transform 0.3s ease;*/
+/*}*/
+
+/* FontAwesome icon override */
+.skill-card i {
+    font-size: 1.5em;
+    color: #222;
+}
+
+/* Fixed Tooltip Card (Drop Target) */
+.skill-info-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(220px, 24vw, 300px);
+    min-height: 120px;
+    max-width: 90%;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    padding: 1.2rem 1rem;
+    z-index: 10;
+    text-align: center;
+    pointer-events: none; /* doesn't block D3 dragging */
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    backdrop-filter: blur(4px);
+}
+
+/* Default text inside card */
+.skill-info-card .placeholder-text {
+    font-style: italic;
+    color: #777;
+}
+
+/* Skill title */
+.skill-info-card h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Skill description */
+.skill-info-card p {
+    margin: 0.2rem 0 0.5rem;
+    color: #444;
+}
+
+/* Detail bullets */
+.skill-info-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    font-size: 0.85rem;
+    text-align: left;
+    color: #555;
+}
+
+.skill-info-card li {
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+}
+
+.skill-info-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #888;
+}
+.skill-info-card.highlight-glow {
+    box-shadow: 0 0 20px 5px rgba(0, 200, 255, 0.6), 0 0 10px 2px rgba(0, 200, 255, 0.5);
+    border: 2px solid rgba(0, 200, 255, 0.8);
+    transition: box-shadow 0.3s ease, border 0.3s ease;
+}
+
+/* Optional subtle animation (pulse) */
+@keyframes cardPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50%      { transform: translate(-50%, -50%) scale(1.02); }
+}
+
+.skill-info-card.pulse {
+    animation: cardPulse 3s infinite;
 }

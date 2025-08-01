@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AEDev – Alexandre Émond</title>
+
     <link rel="stylesheet" href="static/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="assets/favicon.ico" />
@@ -19,9 +20,7 @@
             <a href="mailto:admin@aedev.pro" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
         <div class="hamburger" id="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
+            <div></div><div></div><div></div>
         </div>
     </div>
 </header>
@@ -35,6 +34,7 @@
 </nav>
 
 <main class="snap-container">
+
     <section id="home" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
@@ -59,17 +59,14 @@
         <div class="section-inner">
             <div class="section-content">
                 <h2>Projects</h2>
-
                 <div class="flip-carousel">
                     <div class="flip-card" id="flipCard">
                         <div class="flip-card-inner" id="cardInner">
                             <div class="flip-card-front" id="cardFront"></div>
                             <div class="flip-card-back" id="cardBack"></div>
                         </div>
-
                         <button class="flip-hint-btn" id="manualFlipBtn">↻</button>
                     </div>
-
                     <div class="carousel-controls">
                         <div class="flip-dots" id="dotsContainer"></div>
                     </div>
@@ -79,17 +76,21 @@
         </div>
     </section>
 
-
-
     <section id="skills" class="section narrow snap-child">
-        <div class="section-inner">
+        <div class="section-inner skill-section">
             <div class="section-content">
-                <h2>Skills</h2>
-                <p>PHP, JS, HTML, CSS, C++, ESP32, WebGL, Docker, Linux...</p>
+                <div class="skill-tree-wrapper">
+
+                    <div id="skill-tree"></div>
+                </div>
             </div>
-            <div class="section-bg-space"></div>
+
+            <div class="section-bg-space">                    <div id="skill-info-card" class="skill-info-card">
+                    <p class="placeholder-text">🡆 Drag a skill node into this card to see details</p>
+                </div></div>
         </div>
     </section>
+
 
     <section id="contact" class="section narrow snap-child">
         <div class="section-inner">
@@ -107,24 +108,22 @@
     </section>
 
 </main>
-<button class="scroll-up-btn hidden" id="scrollUpBtn" aria-label="Scroll up">
-    <i class="fas fa-chevron-up"></i>
-</button>
 
-<button class="scroll-down-btn" id="scrollDownBtn" aria-label="Scroll down">
-    <i class="fas fa-chevron-down"></i>
-</button>
+<button class="scroll-up-btn hidden" id="scrollUpBtn" aria-label="Scroll up"><i class="fas fa-chevron-up"></i></button>
+<button class="scroll-down-btn" id="scrollDownBtn" aria-label="Scroll down"><i class="fas fa-chevron-down"></i></button>
 
 <footer class="site-footer">
     <div class="footer-social-icons">
         <a href="https://github.com/a3emond" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/alexandre-emond-2750492a7 " target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/alexandre-emond-2750492a7" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
         <a href="mailto:admin@aedev.pro" aria-label="Email"><i class="fas fa-envelope"></i></a>
     </div>
     <div>&copy; 2025 AEDev — Alexandre Émond</div>
 </footer>
 
-<script src="static/main.js"></script>
-<script src="static/flip_card.js"></script>
+<!-- Main scripts -->
+<script src="static/main.js" defer></script>
+<script src="static/flip_card.js" defer></script>
+<script type="module" src="static/skill_tree.js"></script>
 </body>
 </html>
