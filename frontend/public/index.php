@@ -41,8 +41,8 @@
                 <h1>AEDev</h1>
                 <p class="fade-in">Developer. Designer. Maker.</p>
             </div>
+
         </div>
-        <div class="section-bg-space"></div>
     </section>
 
     <section id="about" class="section narrow snap-child">
@@ -51,7 +51,6 @@
                 <h2>About Me</h2>
                 <p>Hi, I'm Alexandre Émond — a full-stack developer and maker. I build modern tools and interactive experiences across web, embedded, and game platforms.</p>
             </div>
-            <div class="section-bg-space"></div>
         </div>
     </section>
 
@@ -72,7 +71,6 @@
                     </div>
                 </div>
             </div>
-            <div class="section-bg-space"></div>
         </div>
     </section>
 
@@ -80,14 +78,10 @@
         <div class="section-inner skill-section">
             <div class="section-content">
                 <div class="skill-tree-wrapper">
-
                     <div id="skill-tree"></div>
+                    <div id="skill-info-card" class="skill-info-card"></div>
                 </div>
             </div>
-
-            <div class="section-bg-space">                    <div id="skill-info-card" class="skill-info-card">
-                    <p class="placeholder-text">🡆 Drag a skill node into this card to see details</p>
-                </div></div>
         </div>
     </section>
 
@@ -103,7 +97,6 @@
                     <button type="submit" class="btn">Send Message</button>
                 </form>
             </div>
-            <div class="section-bg-space"></div>
         </div>
     </section>
 

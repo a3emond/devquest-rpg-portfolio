@@ -175,10 +175,11 @@ export function renderSkillTree(containerId, jsonData) {
     function updateCard(skill) {
         card.classed("active", true)
             .html(`
-                <h3>${skill.label}</h3>
-                <p>${skill.description}</p>
-                <ul>${(skill.details || []).map(d => `<li>${d}</li>`).join("")}</ul>
-            `);
+            <button class="close-skill-card" aria-label="Close">✕</button>
+            <h3>${skill.label}</h3>
+            <p>${skill.description}</p>
+            <ul>${(skill.details || []).map(d => `<li>${d}</li>`).join("")}</ul>
+        `);
 
         currentHeld = skill;
         skill.fx = dropX;
@@ -190,6 +191,13 @@ export function renderSkillTree(containerId, jsonData) {
             currentHeld = null;
             resetCard();
         }, 3000);
+
+        // Allow manual close
+        card.select(".close-skill-card").on("click", () => {
+            ejectSkill(skill);
+            currentHeld = null;
+            resetCard();
+        });
     }
 
     function resetCard() {
