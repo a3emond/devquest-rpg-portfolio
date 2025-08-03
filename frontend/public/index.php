@@ -16,7 +16,7 @@
         <a href="#home"><img src="assets/logo_header.png" alt="AEDev Logo" class="logo" /></a>
         <div class="header-social-icons">
             <a href="https://github.com/a3emond" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/alexandre-emond-2750492a7" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/a-emond/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             <a href="mailto:admin@aedev.pro" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
         <div class="hamburger" id="hamburger">
@@ -28,8 +28,8 @@
 <nav class="dropdown-menu" id="menu">
     <a href="#home">Home</a>
     <a href="#about">About</a>
-    <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
 </nav>
 
@@ -54,6 +54,17 @@
         </div>
     </section>
 
+    <section id="skills" class="section narrow snap-child">
+        <div class="section-inner skill-section">
+            <div class="section-content">
+                <div class="skill-tree-wrapper">
+                    <div id="skill-tree"></div>
+                    <div id="skill-info-card" class="skill-info-card"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="projects" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
@@ -73,19 +84,6 @@
             </div>
         </div>
     </section>
-
-    <section id="skills" class="section narrow snap-child">
-        <div class="section-inner skill-section">
-            <div class="section-content">
-                <div class="skill-tree-wrapper">
-                    <div id="skill-tree"></div>
-                    <div id="skill-info-card" class="skill-info-card"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
     <section id="contact" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">

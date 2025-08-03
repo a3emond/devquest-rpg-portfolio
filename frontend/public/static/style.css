@@ -348,10 +348,10 @@
     }
     .flip-card {
         width: 100%;
-        max-width: 400px;
+        max-width: 550px;
         min-width: 300px;
         aspect-ratio: 1 / 2;
-        max-height: 450px;
+        max-height: 650px;
         cursor: grab;
         position: relative;
     }

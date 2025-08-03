@@ -1,4 +1,5 @@
 // AEDev Skill Tree Visualization with Drop Zone Magnet, Animated Zone, and Card System
+
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -53,36 +54,62 @@ export function renderSkillTree(containerId, jsonData) {
         .attr("height", height)
         .attr("viewBox", [0, 0, width, height])
         .attr("id", "skill-svg")
-        .style("background", "transparent")
-        .style("border", "2px solid rgba(255,255,255,0.1)")
+        .style("background", "rgba(122, 117, 77, 0.45)")
+        .style("border", "2px solid #a17f1a")
         .style("border-radius", "12px")
         .style("backdrop-filter", "blur(6px)")
         .style("box-shadow", "0 0 20px rgba(0,255,255,0.15)");
 
     const svg = svgBase.append("g");
 
-    jsonData.groups.forEach(group => {
-        const zone = group.zone || {};
-        svg.append("rect")
-            .attr("class", "skill-zone")
-            .attr("x", zone.x || 0)
-            .attr("y", zone.y || 0)
-            .attr("width", zone.width || 300)
-            .attr("height", zone.height || 300)
-            .attr("fill", zone.color || "rgba(255,255,255,0.03)")
-            .attr("rx", 30);
+    // Drop zone coordinates and radius
+    const dropX = width / 2;
+    const dropY = height / 2;
+    const dropRadius = 28;
 
-        if (zone.icon) {
-            svg.append("text")
-                .attr("x", (zone.x || 0) + 10)
-                .attr("y", (zone.y || 0) + 30)
-                .attr("class", "fa")
-                .style("font-family", "FontAwesome")
-                .style("fill", "#999")
-                .text(resolveIcon(zone.icon));
-        }
-    });
+    // Draw drop zone (under everything else)
+    const dropZone = svg.append("circle")
+        .attr("cx", dropX)
+        .attr("cy", dropY)
+        .attr("r", dropRadius)
+        .attr("fill", "#222")
+        .attr("stroke", "#88deba")
+        .attr("stroke-width", 2)
+        .style("filter", "drop-shadow(0 0 6px #88deba)")
+        .transition()
+        .duration(1500)
+        .ease(d3.easeSin)
+        .attr("r", dropRadius + 4)
+        .transition()
+        .duration(1500)
+        .ease(d3.easeSin)
+        .attr("r", dropRadius)
+        .on("end", function repeat() {
+            d3.select(this).transition().duration(1500).attr("r", dropRadius + 4).transition().duration(1500).attr("r", dropRadius).on("end", repeat);
+        });
 
+    svg.append("text")
+        .attr("x", dropX)
+        .attr("y", dropY - dropRadius - 10)
+        .attr("text-anchor", "middle")
+        .text("Drop Here")
+        .style("fill", "#3CCA8F")
+        .style("font-weight", "bold");
+
+    // Title (above drop zone, but still under nodes/links)
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", 54)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "44px")
+        .attr("font-family", "sans-serif")
+        .attr("font-weight", "bold")
+        .attr("fill", "#a17f1a")
+        .attr("opacity", 0.33)
+        .attr("pointer-events", "none")
+        .text("Skills");
+
+    // Prepare nodes and links
     const nodes = jsonData.skills.map(skill => ({
         ...skill,
         id: skill.id,
@@ -104,15 +131,17 @@ export function renderSkillTree(containerId, jsonData) {
         .force("center", d3.forceCenter(center.x, center.y))
         .force("collision", d3.forceCollide().radius(35));
 
+    // Draw links (above drop zone)
     const link = svg.append("g")
-        .attr("stroke", "#aaa")
+        .attr("stroke", "#a17f1a")
         .attr("stroke-width", 1.5)
         .selectAll("line")
         .data(links)
         .join("line");
 
+    // Draw nodes (above links and drop zone)
     const node = svg.append("g")
-        .attr("stroke", "#fff")
+        .attr("stroke", "#d4af37")
         .attr("stroke-width", 1)
         .selectAll("g")
         .data(nodes)
@@ -136,41 +165,59 @@ export function renderSkillTree(containerId, jsonData) {
         .attr("font-size", "16px")
         .text(d => resolveIcon(d.icon || ""));
 
+    // Tooltip
+    const tooltipGroup = svg.append("g")
+        .attr("pointer-events", "none")
+        .style("display", "none");
+
+    const tooltipRect = tooltipGroup.append("rect")
+        .attr("fill", "#222")
+        .attr("rx", 6)
+        .attr("ry", 6)
+        .attr("opacity", 0.9);
+
+    const tooltipText = tooltipGroup.append("text")
+        .attr("fill", "#fff")
+        .attr("font-size", "14px")
+        .attr("x", 8)
+        .attr("y", 20);
+
+    node.on("mouseover", (event, d) => {
+        tooltipText.text(d.label);
+        const textBBox = tooltipText.node().getBBox();
+        const tooltipWidth = textBBox.width + 16;
+        const tooltipHeight = textBBox.height + 16;
+        tooltipRect
+            .attr("width", tooltipWidth)
+            .attr("height", tooltipHeight)
+            .attr("x", 0)
+            .attr("y", 0);
+        tooltipText
+            .attr("x", 8)
+            .attr("y", tooltipHeight / 2 + textBBox.height / 4);
+        tooltipGroup.style("display", null);
+    })
+        .on("mousemove", (event) => {
+            const [mouseX, mouseY] = d3.pointer(event, svg.node());
+            const svgWidth = +svgBase.attr("width");
+            const svgHeight = +svgBase.attr("height");
+            const tooltipWidth = +tooltipRect.attr("width");
+            const tooltipHeight = +tooltipRect.attr("height");
+            let x = mouseX + 18;
+            let y = mouseY - 10;
+            if (x + tooltipWidth > svgWidth) x = svgWidth - tooltipWidth - 2;
+            if (y + tooltipHeight > svgHeight) y = svgHeight - tooltipHeight - 2;
+            if (x < 0) x = 2;
+            if (y < 0) y = 2;
+            tooltipGroup.attr("transform", `translate(${x},${y})`);
+        })
+        .on("mouseout", () => {
+            tooltipGroup.style("display", "none");
+        });
+
     const card = d3.select("#skill-info-card");
     let currentHeld = null;
     let cardClearTimeout = null;
-
-    const dropX = width / 2;
-    const dropY = height / 2;
-    const dropRadius = 28;
-
-    const dropZone = svg.append("circle")
-        .attr("cx", dropX)
-        .attr("cy", dropY)
-        .attr("r", dropRadius)
-        .attr("fill", "rgba(0,255,255,0.2)")
-        .attr("stroke", "cyan")
-        .attr("stroke-width", 2)
-        .style("filter", "drop-shadow(0 0 6px cyan)")
-        .transition()
-        .duration(1500)
-        .ease(d3.easeSin)
-        .attr("r", dropRadius + 4)
-        .transition()
-        .duration(1500)
-        .ease(d3.easeSin)
-        .attr("r", dropRadius)
-        .on("end", function repeat() {
-            d3.select(this).transition().duration(1500).attr("r", dropRadius + 4).transition().duration(1500).attr("r", dropRadius).on("end", repeat);
-        });
-
-    svg.append("text")
-        .attr("x", dropX)
-        .attr("y", dropY - dropRadius - 10)
-        .attr("text-anchor", "middle")
-        .text("Drop Here")
-        .style("fill", "#00ffff")
-        .style("font-weight", "bold");
 
     function updateCard(skill) {
         card.classed("active", true)
@@ -192,7 +239,6 @@ export function renderSkillTree(containerId, jsonData) {
             resetCard();
         }, 3000);
 
-        // Allow manual close
         card.select(".close-skill-card").on("click", () => {
             ejectSkill(skill);
             currentHeld = null;
@@ -218,14 +264,11 @@ export function renderSkillTree(containerId, jsonData) {
         nodes.forEach(d => {
             d.x = Math.max(30, Math.min(width - 30, d.x));
             d.y = Math.max(30, Math.min(height - 30, d.y));
-
             const dist = Math.sqrt((d.x - dropX) ** 2 + (d.y - dropY) ** 2);
-
             if (currentHeld && currentHeld.id === d.id) {
                 d.fx = dropX;
                 d.fy = dropY;
             }
-
             if (dist < dropRadius && d.dragPriority > 0) {
                 if (!currentHeld || currentHeld.id !== d.id) {
                     if (currentHeld && currentHeld.id !== d.id) {
@@ -254,15 +297,10 @@ export function renderSkillTree(containerId, jsonData) {
             const t = (elapsed + i * 100) * 0.001;
             const swimX = Math.cos(t * freq) * amp;
             const swimY = Math.sin(t * freq) * amp;
-
-            const centerBiasX = (width / 2 - d.x) / width;  // ranges -0.5 to 0.5
+            const centerBiasX = (width / 2 - d.x) / width;
             const centerBiasY = (height / 2 - d.y) / height;
-
-            // Position-aware nudge + softened oscillation
             d.vx += swimX * 0.01 + centerBiasX * 0.2;
             d.vy += swimY * 0.01 + centerBiasY * 0.2;
-
-            // Bounce near walls
             if (d.x < padding) d.vx += 1;
             if (d.x > width - padding) d.vx -= 1;
             if (d.y < padding) d.vy += 1;
@@ -271,7 +309,6 @@ export function renderSkillTree(containerId, jsonData) {
 
         simulation.alpha(0.1).restart();
     });
-
 
     function drag(simulation) {
         return d3.drag()
