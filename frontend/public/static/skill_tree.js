@@ -34,10 +34,15 @@ function resolveIcon(iconStr) {
         "fa-cogs": "\uf085",
         "fa-database": "\uf1c0",
         "fa-chart-line": "\uf201",
-        "fa-user": "\uf007"
+        "fa-user": "\uf007",
+        "fa-code-branch": "\uf126",
+        "fa-keyboard": "\uf11c",
+        "fa-network-wired": "\uf6ff",
+        "fa-shield-halved": "\ue00c",
+        "fa-people-group": "\ue533"
     };
     const name = iconStr?.split(" ").at(-1);
-    return fontAwesomeMap[name] || "\uf128";
+    return fontAwesomeMap[name] || "\uf128"; // fallback = question mark
 }
 
 export function renderSkillTree(containerId, jsonData) {

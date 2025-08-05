@@ -3,210 +3,289 @@
   "groups": [
     {
       "id": "prog_langs",
-      "label": "Programming Languages",
-      "row": 0,
+      "label": { "en": "Programming Languages", "fr": "Langages de Programmation" },
       "categoryIcon": "fa-solid fa-code",
       "skills": ["frontend_langs", "backend_langs", "system_langs", "compiled_langs"]
     },
     {
-      "id": "foundations",
-      "label": "Fundamentals",
-      "row": 0,
-      "categoryIcon": "fa-solid fa-cube",
-      "skills": ["ds_core"]
+      "id": "tools_tech",
+      "label": { "en": "Tools & Technologies", "fr": "Outils & Technologies" },
+      "categoryIcon": "fa-solid fa-screwdriver-wrench",
+      "skills": ["version_control", "editors", "deployment", "api_payment"]
     },
     {
-      "id": "web_backend",
-      "label": "Web & Backend Development",
-      "row": 1,
-      "categoryIcon": "fa-solid fa-server",
-      "skills": ["core_web", "data_handling", "sys_admin", "app_dev", "algorithms"]
-    },
-    {
-      "id": "infrastructure",
-      "label": "Infrastructure & Deployment",
-      "row": 2,
+      "id": "infra_system",
+      "label": { "en": "System & Infrastructure", "fr": "Système & Infrastructure" },
       "categoryIcon": "fa-solid fa-network-wired",
-      "skills": ["web_tech", "ai_iot", "deployment", "api_payment", "design_concepts"]
+      "skills": ["sys_admin", "cloud_devops", "security"]
     },
     {
-      "id": "cloud_softskills",
-      "label": "Cloud & Soft Skills",
-      "row": 3,
-      "categoryIcon": "fa-solid fa-cloud",
-      "skills": ["cloud_devops", "soft_core"]
+      "id": "web_mobile",
+      "label": { "en": "Web & Mobile Development", "fr": "Développement Web & Mobile" },
+      "categoryIcon": "fa-solid fa-display",
+      "skills": ["core_web", "app_dev", "web_tech"]
+    },
+    {
+      "id": "data_ai",
+      "label": { "en": "Data, AI & Automation", "fr": "Données, IA & Automatisation" },
+      "categoryIcon": "fa-solid fa-robot",
+      "skills": ["data_handling", "ai_iot"]
+    },
+    {
+      "id": "algo_ds",
+      "label": { "en": "Data Structures & Algorithms", "fr": "Structures de Données & Algorithmes" },
+      "categoryIcon": "fa-solid fa-cubes",
+      "skills": ["ds_core", "algorithms", "design_concepts"]
+    },
+    {
+      "id": "soft_skills",
+      "label": { "en": "Soft Skills", "fr": "Compétences Transversales" },
+      "categoryIcon": "fa-solid fa-user",
+      "skills": ["soft_core", "soft_team", "soft_mindset"]
     }
   ],
   "skills": [
     {
       "id": "frontend_langs",
-      "label": "Frontend Stack",
+      "label": { "en": "Frontend Stack", "fr": "Technologies Frontend" },
       "icon": "fa-solid fa-display",
-      "row": 0,
       "groupId": "prog_langs",
-      "description": "Essential client-side tools.",
-      "details": ["HTML", "CSS", "JS", "TS"],
-      "unlocks": ["core_web"]
+      "description": {
+        "en": "Client-side technologies for dynamic and accessible UI.",
+        "fr": "Technologies côté client pour des interfaces dynamiques et accessibles."
+      },
+      "details": ["HTML", "CSS", "JavaScript", "TypeScript", "SASS / LESS"]
     },
     {
       "id": "backend_langs",
-      "label": "Backend Stack",
+      "label": { "en": "Backend Stack", "fr": "Technologies Backend" },
       "icon": "fa-solid fa-database",
-      "row": 0,
       "groupId": "prog_langs",
-      "description": "General-purpose backend languages.",
-      "details": ["PHP", "Python", "SQL"],
-      "unlocks": ["data_handling"]
+      "description": {
+        "en": "Server-side and database programming languages.",
+        "fr": "Langages de programmation côté serveur et gestion de base de données."
+      },
+      "details": ["PHP", "Python", "SQL", "Node.js", "Django", "Flask", "MongoDB", "ORM (Propel)"]
     },
     {
       "id": "system_langs",
-      "label": "System Scripting",
+      "label": { "en": "System Scripting", "fr": "Scripts Système" },
       "icon": "fa-solid fa-terminal",
-      "row": 0,
       "groupId": "prog_langs",
-      "description": "Scripting for automation and OS.",
-      "details": ["Bash", "PowerShell"],
-      "unlocks": ["sys_admin"]
+      "description": {
+        "en": "Scripting languages for automation and system control.",
+        "fr": "Langages de script pour l'automatisation et l'administration système."
+      },
+      "details": ["Bash", "PowerShell"]
     },
     {
       "id": "compiled_langs",
-      "label": "Compiled Languages",
+      "label": { "en": "Compiled Languages", "fr": "Langages Compilés" },
       "icon": "fa-solid fa-microchip",
-      "row": 0,
       "groupId": "prog_langs",
-      "description": "Statically compiled high-perf. languages.",
-      "details": ["Java", "C#", "C++"],
-      "unlocks": ["app_dev"]
+      "description": {
+        "en": "Statically typed, high-performance programming languages.",
+        "fr": "Langages compilés à typage statique pour des performances élevées."
+      },
+      "details": ["Java", "C#", "C++", "Kotlin", "Lua"]
     },
     {
-      "id": "ds_core",
-      "label": "Data Structures",
-      "icon": "fa-solid fa-cubes",
-      "row": 0,
-      "groupId": "foundations",
-      "description": "Building blocks for logic.",
-      "details": ["Trees", "Hash tables", "Graphs"],
-      "unlocks": ["algorithms"]
+      "id": "version_control",
+      "label": { "en": "Version Control", "fr": "Contrôle de Version" },
+      "icon": "fa-solid fa-code-branch",
+      "groupId": "tools_tech",
+      "description": {
+        "en": "Tools and practices for source control and collaboration.",
+        "fr": "Outils et bonnes pratiques pour la gestion de code source et le travail collaboratif."
+      },
+      "details": ["Git", "GitHub", "GitLab", "Code reviews", "Branching", "Documentation"]
     },
     {
-      "id": "core_web",
-      "label": "Core Web",
-      "icon": "fa-solid fa-globe",
-      "row": 1,
-      "groupId": "web_backend",
-      "description": "Foundational techniques for the web.",
-      "details": ["Accessibility", "Responsive", "PWAs"],
-      "unlocks": ["web_tech"]
-    },
-    {
-      "id": "data_handling",
-      "label": "Data & Reporting",
-      "icon": "fa-solid fa-chart-line",
-      "row": 1,
-      "groupId": "web_backend",
-      "description": "Work with data, insights & storage.",
-      "details": ["MySQL", "PostgreSQL", "Reports"],
-      "unlocks": ["ai_iot"]
-    },
-    {
-      "id": "sys_admin",
-      "label": "System Admin",
-      "icon": "fa-solid fa-server",
-      "row": 1,
-      "groupId": "web_backend",
-      "description": "Infrastructure and server ops.",
-      "details": ["Linux", "Virtualization", "Backups"],
-      "unlocks": ["deployment"]
-    },
-    {
-      "id": "app_dev",
-      "label": "App Development",
-      "icon": "fa-solid fa-code",
-      "row": 1,
-      "groupId": "web_backend",
-      "description": "Build apps and services.",
-      "details": ["Mobile", "Desktop", "Frameworks"],
-      "unlocks": ["api_payment"]
-    },
-    {
-      "id": "algorithms",
-      "label": "Algorithms",
-      "icon": "fa-solid fa-sitemap",
-      "row": 1,
-      "groupId": "web_backend",
-      "description": "Logic and processing patterns.",
-      "details": ["Sorting", "Recursion", "Big-O"],
-      "unlocks": ["design_concepts"]
-    },
-    {
-      "id": "web_tech",
-      "label": "Web Technologies",
-      "icon": "fa-solid fa-layer-group",
-      "row": 2,
-      "groupId": "infrastructure",
-      "description": "Support & content technologies.",
-      "details": ["CMS", "SEO", "Ecommerce"],
-      "unlocks": []
-    },
-    {
-      "id": "ai_iot",
-      "label": "AI & Automation",
-      "icon": "fa-solid fa-robot",
-      "row": 2,
-      "groupId": "infrastructure",
-      "description": "Smart systems & ML.",
-      "details": ["IoT", "AI", "Scripting"],
-      "unlocks": []
+      "id": "editors",
+      "label": { "en": "Editors & IDEs", "fr": "Éditeurs & Environnements de Développement" },
+      "icon": "fa-solid fa-keyboard",
+      "groupId": "tools_tech",
+      "description": {
+        "en": "Development tools for writing and managing code.",
+        "fr": "Outils de développement pour écrire et gérer du code."
+      },
+      "details": ["VS Code", "Vim / Neovim", "JetBrains IDEs", "Visual Studio", "Android Studio", "Eclipse", "IntelliJ"]
     },
     {
       "id": "deployment",
-      "label": "Deployment",
+      "label": { "en": "Deployment & Infrastructure", "fr": "Déploiement & Infrastructure" },
       "icon": "fa-solid fa-box-open",
-      "row": 2,
-      "groupId": "infrastructure",
-      "description": "Packaging, shipping, scaling.",
-      "details": ["Docker", "CI/CD", "Apache"],
-      "unlocks": ["cloud_devops"]
+      "groupId": "tools_tech",
+      "description": {
+        "en": "Tools for packaging and deploying scalable apps.",
+        "fr": "Outils pour empaqueter et déployer des applications évolutives."
+      },
+      "details": ["Docker", "Kubernetes", "Apache", "Nginx", "CI/CD"]
     },
     {
       "id": "api_payment",
-      "label": "APIs & Payments",
+      "label": { "en": "APIs & Payments", "fr": "APIs & Paiements" },
       "icon": "fa-solid fa-credit-card",
-      "row": 2,
-      "groupId": "infrastructure",
-      "description": "Service endpoints and gateways.",
-      "details": ["REST", "GraphQL", "Stripe"],
-      "unlocks": []
+      "groupId": "tools_tech",
+      "description": {
+        "en": "Services and testing tools for APIs and payment systems.",
+        "fr": "Services et outils de test pour les APIs et les systèmes de paiement."
+      },
+      "details": ["Postman", "Stripe", "PayPal", "REST", "GraphQL", "API Gateways", "WebSocket"]
     },
     {
-      "id": "design_concepts",
-      "label": "Software Design",
-      "icon": "fa-solid fa-cogs",
-      "row": 2,
-      "groupId": "infrastructure",
-      "description": "Good structure and performance.",
-      "details": ["OOP", "Concurrency", "Patterns"],
-      "unlocks": []
+      "id": "sys_admin",
+      "label": { "en": "System Administration", "fr": "Administration Système" },
+      "icon": "fa-solid fa-server",
+      "groupId": "infra_system",
+      "description": {
+        "en": "Managing and maintaining system infrastructure.",
+        "fr": "Gestion et maintenance de l'infrastructure système."
+      },
+      "details": ["Server setup", "DB admin", "Web hosting", "Troubleshooting", "Virtualization", "Backups"]
     },
     {
       "id": "cloud_devops",
-      "label": "Cloud & DevOps",
+      "label": { "en": "Cloud & DevOps", "fr": "Cloud & DevOps" },
       "icon": "fa-solid fa-cloud",
-      "row": 3,
-      "groupId": "cloud_softskills",
-      "description": "Automated deployments, cloud scaling.",
-      "details": ["K8s", "Scaling", "Infra as Code"],
-      "unlocks": []
+      "groupId": "infra_system",
+      "description": {
+        "en": "Deployment pipelines and scalable cloud environments.",
+        "fr": "Pipelines de déploiement et environnements cloud évolutifs."
+      },
+      "details": ["AWS", "Azure", "Google Cloud", "CI/CD", "Monitoring", "Infrastructure as Code"]
+    },
+    {
+      "id": "security",
+      "label": { "en": "Security & Compliance", "fr": "Sécurité & Conformité" },
+      "icon": "fa-solid fa-shield-halved",
+      "groupId": "infra_system",
+      "description": {
+        "en": "Protecting systems and ensuring legal compliance.",
+        "fr": "Protection des systèmes et conformité légale."
+      },
+      "details": ["IAM", "Encryption", "Firewalls", "GDPR", "Secure coding", "Network security protocols"]
+    },
+    {
+      "id": "core_web",
+      "label": { "en": "Core Web Development", "fr": "Développement Web de Base" },
+      "icon": "fa-solid fa-globe",
+      "groupId": "web_mobile",
+      "description": {
+        "en": "Building accessible and performant web experiences.",
+        "fr": "Création d'expériences web accessibles et performantes."
+      },
+      "details": ["Web dev", "PWAs", "Accessibility", "CDNs", "Responsive design", "SEO basics"]
+    },
+    {
+      "id": "app_dev",
+      "label": { "en": "App Development", "fr": "Développement d'Applications" },
+      "icon": "fa-solid fa-code",
+      "groupId": "web_mobile",
+      "description": {
+        "en": "Creating full-stack, cross-platform applications.",
+        "fr": "Création d'applications multiplateformes et full-stack."
+      },
+      "details": ["Mobile dev", "Cross-platform", "Back-end frameworks", "API dev", "GraphQL / REST", "Desktop apps"]
+    },
+    {
+      "id": "web_tech",
+      "label": { "en": "Web Technologies", "fr": "Technologies Web" },
+      "icon": "fa-solid fa-layer-group",
+      "groupId": "web_mobile",
+      "description": {
+        "en": "Supporting technologies for modern web systems.",
+        "fr": "Technologies complémentaires pour les systèmes web modernes."
+      },
+      "details": ["CMS", "SEO", "E-Commerce", "Email automation", "Networking protocols (HTTP, FTP)"]
+    },
+    {
+      "id": "data_handling",
+      "label": { "en": "Data Handling & Visualization", "fr": "Données & Visualisation" },
+      "icon": "fa-solid fa-chart-line",
+      "groupId": "data_ai",
+      "description": {
+        "en": "Extracting, analyzing, and visualizing data.",
+        "fr": "Extraction, analyse et visualisation des données."
+      },
+      "details": ["Big Data", "Dashboards", "Analytics", "Reporting", "PostgreSQL", "MySQL"]
+    },
+    {
+      "id": "ai_iot",
+      "label": { "en": "AI & Automation", "fr": "IA & Automatisation" },
+      "icon": "fa-solid fa-robot",
+      "groupId": "data_ai",
+      "description": {
+        "en": "Smart systems, automation, and machine learning.",
+        "fr": "Systèmes intelligents, automatisation et apprentissage automatique."
+      },
+      "details": ["Machine Learning", "IoT systems", "Scripting", "PyTorch", "Scikit-learn"]
+    },
+    {
+      "id": "ds_core",
+      "label": { "en": "Core Data Structures", "fr": "Structures de Données" },
+      "icon": "fa-solid fa-cubes",
+      "groupId": "algo_ds",
+      "description": {
+        "en": "Data containers for structuring and storing information.",
+        "fr": "Structures de données pour organiser et stocker l'information."
+      },
+      "details": ["Arrays", "Linked Lists", "Trees", "Graphs", "Hash Tables", "Heaps", "Tries", "Bit Arrays"]
+    },
+    {
+      "id": "algorithms",
+      "label": { "en": "Algorithms", "fr": "Algorithmes" },
+      "icon": "fa-solid fa-sitemap",
+      "groupId": "algo_ds",
+      "description": {
+        "en": "Solving problems with step-by-step logic.",
+        "fr": "Résolution de problèmes via une logique étape par étape."
+      },
+      "details": ["Sorting", "Searching", "Recursion", "Graph traversal", "Dynamic programming", "Big-O notation"]
+    },
+    {
+      "id": "design_concepts",
+      "label": { "en": "Software Design Concepts", "fr": "Concepts de Conception Logicielle" },
+      "icon": "fa-solid fa-cogs",
+      "groupId": "algo_ds",
+      "description": {
+        "en": "Principles and patterns for clean, efficient code.",
+        "fr": "Principes et modèles pour un code clair et efficace."
+      },
+      "details": ["OOP", "Functional Programming", "Asynchronous", "Patterns", "State Management", "Error Handling", "Concurrency", "Profiling"]
     },
     {
       "id": "soft_core",
-      "label": "Soft Skills",
+      "label": { "en": "Core Soft Skills", "fr": "Compétences de Base" },
       "icon": "fa-solid fa-user",
-      "row": 3,
-      "groupId": "cloud_softskills",
-      "description": "Developer mindset and work ethic.",
-      "details": ["Teamwork", "Critical thinking", "Mentorship"],
-      "unlocks": []
+      "groupId": "soft_skills",
+      "description": {
+        "en": "Foundational personal traits and communication.",
+        "fr": "Traits personnels fondamentaux et communication."
+      },
+      "details": ["Problem-solving", "Communication", "Creativity", "Attention to detail", "English & French proficiency"]
+    },
+    {
+      "id": "soft_team",
+      "label": { "en": "Team Collaboration", "fr": "Collaboration en Équipe" },
+      "icon": "fa-solid fa-people-group",
+      "groupId": "soft_skills",
+      "description": {
+        "en": "Working well within teams and leadership.",
+        "fr": "Travail d'équipe efficace et compétences de leadership."
+      },
+      "details": ["Collaboration", "Feedback", "Mentoring", "Conflict resolution", "Cross-cultural communication"]
+    },
+    {
+      "id": "soft_mindset",
+      "label": { "en": "Mindset & Growth", "fr": "État d'Esprit & Croissance" },
+      "icon": "fa-solid fa-brain",
+      "groupId": "soft_skills",
+      "description": {
+        "en": "Mindset traits that promote personal and team growth.",
+        "fr": "Traits d'état d'esprit favorisant la croissance personnelle et d'équipe."
+      },
+      "details": ["Adaptability", "Initiative", "Empathy", "Time Management", "Professionalism", "Growth mindset"]
     }
   ]
 }

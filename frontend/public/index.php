@@ -19,6 +19,9 @@
             <a href="https://www.linkedin.com/in/a-emond/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             <a href="mailto:admin@aedev.pro" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
+        <div class="lang-toggle">
+            <button id="langToggleBtn" aria-label="Toggle Language">EN/FR</button>
+        </div>
         <div class="hamburger" id="hamburger">
             <div></div><div></div><div></div>
         </div>
@@ -26,30 +29,30 @@
 </header>
 
 <nav class="dropdown-menu" id="menu">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <a href="#home" data-i18n="nav.home">Home</a>
+    <a href="#about" data-i18n="nav.about">About</a>
+    <a href="#skills" data-i18n="nav.skills">Skills</a>
+    <a href="#projects" data-i18n="nav.projects">Projects</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
 </nav>
 
 <main class="snap-container">
-
     <section id="home" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
-                <h1>AEDev</h1>
-                <p class="fade-in">Developer. Designer. Maker.</p>
+                <h1 data-i18n="sections.home.title">AEDev</h1>
+                <p class="fade-in" data-i18n="sections.home.subtitle">Developer. Designer. Maker.</p>
             </div>
-
         </div>
     </section>
 
     <section id="about" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
-                <h2>About Me</h2>
-                <p>Hi, I'm Alexandre Émond — a full-stack developer and maker. I build modern tools and interactive experiences across web, embedded, and game platforms.</p>
+                <h2 data-i18n="sections.about.title">About Me</h2>
+                <p data-i18n="sections.about.content">
+                    Hi, I'm Alexandre Émond — a full-stack developer and maker. I build modern tools and interactive experiences across web, embedded, and game platforms.
+                </p>
             </div>
         </div>
     </section>
@@ -68,7 +71,7 @@
     <section id="projects" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
-                <h2>Projects</h2>
+                <h2 data-i18n="sections.projects.title">Projects</h2>
                 <div class="flip-carousel">
                     <div class="flip-card" id="flipCard">
                         <div class="flip-card-inner" id="cardInner">
@@ -84,20 +87,20 @@
             </div>
         </div>
     </section>
+
     <section id="contact" class="section narrow snap-child">
         <div class="section-inner">
             <div class="section-content">
-                <h2>Contact Me</h2>
+                <h2 data-i18n="sections.contact.title">Contact Me</h2>
                 <form action="contact.php" method="POST">
-                    <input type="text" name="name" placeholder="Your Name" required />
-                    <input type="email" name="email" placeholder="Your Email" required />
-                    <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
-                    <button type="submit" class="btn">Send Message</button>
+                    <input type="text" name="name" data-i18n-placeholder="sections.contact.form.name" placeholder="Your Name" required />
+                    <input type="email" name="email" data-i18n-placeholder="sections.contact.form.email" placeholder="Your Email" required />
+                    <textarea name="message" data-i18n-placeholder="sections.contact.form.message" placeholder="Your Message" rows="6" required></textarea>
+                    <button type="submit" class="btn" data-i18n="sections.contact.form.submit">Send Message</button>
                 </form>
             </div>
         </div>
     </section>
-
 </main>
 
 <button class="scroll-up-btn hidden" id="scrollUpBtn" aria-label="Scroll up"><i class="fas fa-chevron-up"></i></button>
@@ -113,7 +116,8 @@
 </footer>
 
 <!-- Main scripts -->
-<script src="static/main.js" defer></script>
+<script type="module" src="static/lang.js"></script>
+<script type="module" src="static/main.js" defer></script>
 <script src="static/flip_card.js" defer></script>
 <script type="module" src="static/skill_tree.js"></script>
 </body>

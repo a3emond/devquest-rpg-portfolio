@@ -1,19 +1,38 @@
+// static/main.js
+import { toggleLang, getCurrentLang, onLangChange } from './lang.js';
+
 document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById('langToggleBtn');
     const hamburger = document.getElementById("hamburger");
-    const menu = document.getElementById("menu"); // .dropdown-menu
+    const menu = document.getElementById("menu");
     const header = document.querySelector(".sticky-header");
+    const footer = document.querySelector(".site-footer");
     const faders = document.querySelectorAll(".fade-in");
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll(".dropdown-menu a");
     const snapContainer = document.querySelector(".snap-container");
+    const scrollDownBtn = document.getElementById("scrollDownBtn");
+    const scrollUpBtn = document.getElementById("scrollUpBtn");
+
+    // === Language Toggle ===
+    if (btn) {
+        // Set initial label and apply listener
+        onLangChange((lang) => {
+            btn.innerText = lang.toUpperCase();
+        });
+
+        btn.addEventListener('click', () => {
+            toggleLang();
+        });
+    }
 
     // === 1. Toggle hamburger menu ===
-    hamburger.addEventListener("click", () => {
+    hamburger?.addEventListener("click", () => {
         menu.classList.toggle("active");
         hamburger.classList.toggle("open");
     });
 
-    // === 2. Close menu when clicking a nav link ===
+    // === 2. Close menu on nav link click ===
     navLinks.forEach(link => {
         link.addEventListener("click", () => {
             menu.classList.remove("active");
@@ -38,24 +57,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
         });
     }, appearOptions);
 
     faders.forEach(el => appearOnScroll.observe(el));
 
-    // === 4. Scrollspy + Header shadow + Auto-hide logic together ===
-    let lastScrollTop = 0;
+    // === 4. Scrollspy, header/footer visibility, section highlight ===
     let scrollTimeout;
 
     function updateScrollState() {
         const scrollY = snapContainer.scrollTop;
-        const footer = document.querySelector(".site-footer");
         let current = "";
 
-        // Scrollspy
+        // Active section
         sections.forEach(section => {
             const offset = section.offsetTop;
             const height = section.offsetHeight;
@@ -64,40 +82,43 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        // Nav highlight
         navLinks.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${current}`) {
-                link.classList.add("active");
-            }
+            link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
         });
 
-        // Header shadow toggle
-        if (scrollY > 20) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
+        // Header shadow
+        header.classList.toggle("scrolled", scrollY > 20);
 
-        // Immediately hide on scroll
+        // Immediate hide header/footer
         header.style.transform = "translateY(-100%)";
         footer.style.transform = "translateY(100%)";
 
-        // Clear and restart timeout for showing after scrolling stops
+        // Re-show after delay
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
             header.style.transform = "translateY(0)";
             footer.style.transform = "translateY(0)";
         }, 100);
-
-        lastScrollTop = scrollY;
     }
 
+    snapContainer.addEventListener("scroll", () => {
+        updateScrollState();
 
+        const scrollY = snapContainer.scrollTop;
+        const maxScroll = snapContainer.scrollHeight - snapContainer.clientHeight;
 
-    snapContainer.addEventListener("scroll", updateScrollState);
-    updateScrollState(); // Run on load to highlight Home
+        // Show/hide scroll down button
+        scrollDownBtn?.classList.toggle("hidden", scrollY >= maxScroll - 10);
 
-    // === 5. ESC key closes menu ===
+        // Show/hide scroll up button
+        scrollUpBtn?.classList.toggle("hidden", scrollY <= 300);
+    });
+
+    // Initial scroll state
+    updateScrollState();
+
+    // === 5. ESC closes menu ===
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
             menu.classList.remove("active");
@@ -105,58 +126,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const scrollDownBtn = document.getElementById("scrollDownBtn");
-
-    // Scroll to next section
-    scrollDownBtn.addEventListener("click", () => {
+    // === 6. Scroll Down Button ===
+    scrollDownBtn?.addEventListener("click", () => {
         const scrollY = snapContainer.scrollTop;
         const nextSection = Array.from(sections).find(section => section.offsetTop > scrollY + 10);
         if (nextSection) {
-            snapContainer.scrollTo({
-                top: nextSection.offsetTop,
-                behavior: "smooth"
-            });
+            snapContainer.scrollTo({ top: nextSection.offsetTop, behavior: "smooth" });
         }
     });
 
-    // Show/hide arrow based on scroll position
-    snapContainer.addEventListener("scroll", () => {
-        const currentScroll = snapContainer.scrollTop;
-        const maxScroll = snapContainer.scrollHeight - snapContainer.clientHeight;
-
-        if (currentScroll >= maxScroll - 10) {
-            scrollDownBtn.classList.add("hidden");
-        } else {
-            scrollDownBtn.classList.remove("hidden");
-        }
-    });
-
-    const scrollUpBtn = document.getElementById("scrollUpBtn");
-
-    // Scroll to previous section
-    scrollUpBtn.addEventListener("click", () => {
+    // === 7. Scroll Up Button ===
+    scrollUpBtn?.addEventListener("click", () => {
         const scrollY = snapContainer.scrollTop;
-        const reversedSections = Array.from(sections).reverse();
-        const previousSection = reversedSections.find(section => section.offsetTop < scrollY - 10);
-        if (previousSection) {
-            snapContainer.scrollTo({
-                top: previousSection.offsetTop,
-                behavior: "smooth"
-            });
+        const prevSection = Array.from(sections).reverse().find(section => section.offsetTop < scrollY - 10);
+        if (prevSection) {
+            snapContainer.scrollTo({ top: prevSection.offsetTop, behavior: "smooth" });
         }
     });
-
-
-    // Show/hide scroll-up button when not at top
-    snapContainer.addEventListener("scroll", () => {
-        const currentScroll = snapContainer.scrollTop;
-
-        if (currentScroll > 300) {
-            scrollUpBtn.classList.remove("hidden");
-        } else {
-            scrollUpBtn.classList.add("hidden");
-        }
-    });
-
-
 });

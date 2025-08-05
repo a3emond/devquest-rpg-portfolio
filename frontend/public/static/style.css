@@ -140,7 +140,36 @@
     }
     .header-social-icons a:hover { color: var(--color-gold-dark); }
 
-    /* === Hamburger Menu === */
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+#langToggleBtn {
+    background: transparent;
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+#langToggleBtn:hover {
+    background-color: var(--color-gold);
+    color: var(--color-bg);
+    box-shadow: 0 0 8px var(--color-gold);
+}
+
+
+/* === Hamburger Menu === */
     .hamburger {
         width: 30px;
         height: 22px;

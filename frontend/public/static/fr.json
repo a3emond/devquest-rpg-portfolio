@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "sections": {
+    "home": {
+      "title": "AEDev",
+      "subtitle": "Développeur. Designer. Créateur."
+    },
+    "about": {
+      "title": "À propos de moi",
+      "content": "Bonjour, je suis Alexandre Émond — développeur full-stack et créateur. Je conçois des outils modernes et des expériences interactives sur le web, l'embarqué et les jeux."
+    },
+    "projects": {
+      "title": "Projets"
+    },
+    "contact": {
+      "title": "Me contacter",
+      "form": {
+        "name": "Votre nom",
+        "email": "Votre courriel",
+        "message": "Votre message",
+        "submit": "Envoyer le message"
+      }
+    }
+  }
+}
