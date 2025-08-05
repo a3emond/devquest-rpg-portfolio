@@ -1,17 +1,30 @@
 // AEDev Skill Tree Visualization with Drop Zone Magnet, Animated Zone, and Card System
 
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+import { getCurrentLang, onLangChange } from './lang.js';
+
+let currentData = null;
+let currentLang = getCurrentLang();
 
 window.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch("static/full_skill_tree.json");
         if (!response.ok) throw new Error("JSON fetch failed");
-        const jsonData = await response.json();
-        renderSkillTree("skill-tree", jsonData);
+        currentData = await response.json();
+        renderSkillTree("skill-tree", currentData, currentLang);
     } catch (err) {
         console.error("❌ Failed to load skill tree JSON:", err);
     }
 });
+
+// Re-render when language changes
+onLangChange((newLang) => {
+    currentLang = newLang;
+    if (currentData) {
+        renderSkillTree("skill-tree", currentData, currentLang);
+    }
+});
+
 
 function resolveIcon(iconStr) {
     const fontAwesomeMap = {
@@ -45,7 +58,7 @@ function resolveIcon(iconStr) {
     return fontAwesomeMap[name] || "\uf128"; // fallback = question mark
 }
 
-export function renderSkillTree(containerId, jsonData) {
+export function renderSkillTree(containerId, jsonData, lang = "en") {
     const container = d3.select(`#${containerId}`);
     if (container.empty()) return;
     container.selectAll("*").remove();
@@ -123,12 +136,18 @@ export function renderSkillTree(containerId, jsonData) {
         dragPriority: 0
     }));
 
+// === Build links between nodes in same group ===
     const links = [];
-    jsonData.skills.forEach(skill => {
-        (skill.unlocks || []).forEach(target => {
-            links.push({ source: skill.id, target });
-        });
-    });
+    for (let i = 0; i < jsonData.skills.length; i++) {
+        for (let j = i + 1; j < jsonData.skills.length; j++) {
+            const skillA = jsonData.skills[i];
+            const skillB = jsonData.skills[j];
+            if (skillA.groupId && skillA.groupId === skillB.groupId) {
+                links.push({ source: skillA.id, target: skillB.id, internal: true });
+            }
+        }
+    }
+
 
     const simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(120))
@@ -188,7 +207,7 @@ export function renderSkillTree(containerId, jsonData) {
         .attr("y", 20);
 
     node.on("mouseover", (event, d) => {
-        tooltipText.text(d.label);
+        tooltipText.text(d.label?.[lang] || d.label?.en || "No label");
         const textBBox = tooltipText.node().getBBox();
         const tooltipWidth = textBBox.width + 16;
         const tooltipHeight = textBBox.height + 16;
@@ -228,8 +247,8 @@ export function renderSkillTree(containerId, jsonData) {
         card.classed("active", true)
             .html(`
             <button class="close-skill-card" aria-label="Close">✕</button>
-            <h3>${skill.label}</h3>
-            <p>${skill.description}</p>
+            <h3>${skill.label?.[lang] || skill.label?.en}</h3>
+            <p>${skill.description?.[lang] || skill.description?.en}</p>
             <ul>${(skill.details || []).map(d => `<li>${d}</li>`).join("")}</ul>
         `);
 

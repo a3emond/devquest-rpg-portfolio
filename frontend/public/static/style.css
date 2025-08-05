@@ -357,6 +357,46 @@
         transform: scale(1.2);
     }
 
+    /* === About Section === */
+    .about-grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        max-width: 750px;
+    }
+
+    .about-text {
+        flex: 1 1 350px;
+        min-width: 280px;
+    }
+
+    /* Bullet-style text */
+    .about-bullets {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0 2rem;
+    }
+
+    .about-bullets li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .about-bullets li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--color-gold);
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
+
     /* === Flip Card Carousel === */
     .flip-carousel {
         display: flex;

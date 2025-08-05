@@ -29,8 +29,11 @@ export function setLang(lang) {
     if (SUPPORTED_LANGS.includes(lang)) {
         localStorage.setItem(LANG_KEY, lang);
         notifyLangChange(lang);
+        document.documentElement.setAttribute("lang", lang); // for accessibility
+        document.dispatchEvent(new Event("langChanged"));    // flip-card component trigger
     }
 }
+
 
 /**
  * Toggles language between 'en' and 'fr'
@@ -84,8 +87,16 @@ export async function applyTranslations() {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             const value = resolveTranslation(key, translations);
-            if (value) el.textContent = value;
+            if (!value) return;
+
+            // Use innerHTML for tags that may contain icons or rich content
+            if (['A', 'BUTTON', 'SPAN', 'LABEL'].includes(el.tagName)) {
+                el.innerHTML = value;
+            } else {
+                el.textContent = value;
+            }
         });
+
 
         // Placeholder attributes
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {

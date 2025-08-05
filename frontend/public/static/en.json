@@ -13,8 +13,14 @@
     },
     "about": {
       "title": "About Me",
-      "content": "Hi, I'm Alexandre Émond — a full-stack developer and maker. I build modern tools and interactive experiences across web, embedded, and game platforms."
+      "point1": "Hi, I'm Alexandre Émond — a backend-oriented full-stack developer passionate about clean architecture, system performance, and secure deployment.",
+      "point2": "I work with C#/.NET, Java, PHP, Python, C++, and Bash, and build modern APIs (REST, GraphQL).",
+      "point3": "I also have strong expertise in database development (SQL) and DevOps tools like Docker, GitHub Actions, and CI/CD workflows.",
+      "point4": "Currently completing a 3-year Computer Science degree (GPA 99%). I also bring several years of practical technical experience from working in demanding industrial environments.",
+      "cvBtn": "View My CV",
+      "contactBtn": "Get in Touch"
     },
+
     "projects": {
       "title": "Projects"
     },

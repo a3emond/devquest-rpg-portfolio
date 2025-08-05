@@ -1,54 +1,90 @@
+import { toggleLang, getCurrentLang, applyTranslations } from './lang.js';
+
+
 document.addEventListener("DOMContentLoaded", () => {
+
     const projects = [
         {
-            name: "Maze Game",
+            id: "maze",
             url: "https://maze.aedev.pro",
-            desc: "A 3D maze runner built in Blazor with WebGL.",
-            img: "/assets/logo_header.png"
+            img: "/assets/logo_header.png",
+            name: {
+                en: "Maze Game",
+                fr: "Jeu du Labyrinthe"
+            },
+            desc: {
+                en: "A 3D maze runner built in Blazor with WebGL.",
+                fr: "Un labyrinthe 3D construit avec Blazor et WebGL."
+            }
         },
         {
-            name: "CryptoTrade",
+            id: "crypto",
             url: "https://crypto.aedev.pro",
-            desc: "Simulated crypto trading platform with alert system.",
-            img: "/assets/logo_header.png"
+            img: "/assets/logo_header.png",
+            name: {
+                en: "CryptoTrade",
+                fr: "CryptoTrade"
+            },
+            desc: {
+                en: "Simulated crypto trading platform with alert system.",
+                fr: "Plateforme de trading crypto simulée avec alertes."
+            }
         },
         {
-            name: "DevQuest",
+            id: "devquest",
             url: "https://devquest.aedev.pro",
-            desc: "Interactive RPG portfolio with skills and quests.",
-            img: "/assets/logo_header.png"
+            img: "/assets/logo_header.png",
+            name: {
+                en: "DevQuest",
+                fr: "DevQuest"
+            },
+            desc: {
+                en: "Interactive RPG portfolio with skills and quests.",
+                fr: "Portfolio interactif façon RPG avec compétences et quêtes."
+            }
         }
     ];
+
+
 
     function preloadImages(projects) {
         const buffer = new Map();
         return Promise.all(projects.map(project => {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 if (buffer.has(project.img)) {
-                    buffer.set(project.name, buffer.get(project.img));
+                    buffer.set(project.id, buffer.get(project.img));
                     resolve();
                     return;
                 }
                 const img = new Image();
                 img.src = project.img;
-                img.alt = project.name;
+                img.alt = project.name.en;
                 img.classList.add("project-logo");
                 img.onload = () => {
                     buffer.set(project.img, img);
-                    buffer.set(project.name, img);
+                    buffer.set(project.id, img);
                     resolve();
                 };
                 img.onerror = () => {
                     buffer.set(project.img, img);
-                    buffer.set(project.name, img);
+                    buffer.set(project.id, img);
                     resolve();
                 };
             });
         })).then(() => buffer);
+
     }
+
 
     preloadImages(projects).then(projectImages => {
         initFlipCard(projects, projectImages);
+        window.addEventListener("langChanged", () => {
+            document.getElementById("cardFront").innerHTML = "";
+            document.getElementById("cardBack").innerHTML = "";
+            buildCardContent(front, projects[current]);
+            buildCardContent(back, projects[(current + 1) % projects.length]);
+        });
+
     });
 
     function initFlipCard(projects, projectImages) {
@@ -70,30 +106,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const manualBtn = document.getElementById("manualFlipBtn");
 
         function buildCardContent(container, project) {
+            const lang = getCurrentLang();
             container.innerHTML = "";
+
             const title = document.createElement("h3");
-            title.textContent = project.name;
+            title.textContent = project.name[lang] || project.name.en;
 
             const desc = document.createElement("p");
-            desc.textContent = project.desc;
+            desc.textContent = project.desc[lang] || project.desc.en;
 
             const hint = document.createElement("div");
             hint.className = "flip-overlay-hint";
-            hint.textContent = "← drag or use ↻";
+            hint.textContent = lang === "fr" ? "← glissez ou cliquez ↻" : "← drag or use ↻";
 
             const link = document.createElement("a");
             link.className = "try-btn";
             link.href = project.url;
             link.target = "_blank";
-            link.textContent = "Try It";
+            link.textContent = lang === "fr" ? "Essayer" : "Try It";
 
-            const image = projectImages.get(project.name);
+            const image = projectImages.get(project.id);
             container.appendChild(title);
             container.appendChild(image);
             container.appendChild(hint);
             container.appendChild(desc);
             container.appendChild(link);
         }
+
 
         function updateFaces(rotationDeg) {
             const absRotation = Math.abs(rotationDeg);

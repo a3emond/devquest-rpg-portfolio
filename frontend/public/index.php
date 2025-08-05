@@ -48,14 +48,26 @@
 
     <section id="about" class="section narrow snap-child">
         <div class="section-inner">
-            <div class="section-content">
-                <h2 data-i18n="sections.about.title">About Me</h2>
-                <p data-i18n="sections.about.content">
-                    Hi, I'm Alexandre Émond — a full-stack developer and maker. I build modern tools and interactive experiences across web, embedded, and game platforms.
-                </p>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 data-i18n="sections.about.title">About Me</h2>
+
+                    <ul class="about-bullets">
+                        <li data-i18n="sections.about.point1"></li>
+                        <li data-i18n="sections.about.point2"></li>
+                        <li data-i18n="sections.about.point3"></li>
+                        <li data-i18n="sections.about.point4"></li>
+                    </ul>
+
+                    <div class="about-buttons">
+                        <a href="https://cv.aedev.pro" class="btn" target="_blank" data-i18n="sections.about.cvBtn"></a>
+                        <a href="#contact" class="btn outline" data-i18n="sections.about.contactBtn"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
 
     <section id="skills" class="section narrow snap-child">
         <div class="section-inner skill-section">
@@ -118,7 +130,7 @@
 <!-- Main scripts -->
 <script type="module" src="static/lang.js"></script>
 <script type="module" src="static/main.js" defer></script>
-<script src="static/flip_card.js" defer></script>
+<script type="module" src="static/flip_card.js" defer></script>
 <script type="module" src="static/skill_tree.js"></script>
 </body>
 </html>

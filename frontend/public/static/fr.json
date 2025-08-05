@@ -13,7 +13,12 @@
     },
     "about": {
       "title": "À propos de moi",
-      "content": "Bonjour, je suis Alexandre Émond — développeur full-stack et créateur. Je conçois des outils modernes et des expériences interactives sur le web, l'embarqué et les jeux."
+      "point1": "Bonjour, je suis Alexandre Émond — un développeur full-stack axé sur le backend, passionné par l’architecture logicielle propre, la performance des systèmes et le déploiement sécurisé.",
+      "point2": "Je travaille avec C#/.NET, Java, PHP, Python, C++, et Bash, et je conçois des API modernes (REST, GraphQL).",
+      "point3": "Je possède également une solide expertise en développement de bases de données (SQL) et en outils DevOps tels que Docker, GitHub Actions et les pipelines CI/CD.",
+      "point4": "Je termine actuellement un diplôme en Techniques de l'informatique (3 ans), avec une moyenne de 99 %. J’ai aussi acquis une expérience technique concrète dans des environnements industriels exigeants.",
+      "cvBtn": "Voir mon CV",
+      "contactBtn": "Me contacter"
     },
     "projects": {
       "title": "Projets"
