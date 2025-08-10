@@ -18,13 +18,7 @@ final class DbAccess
         private readonly array $options = []
     ) {}
 
-    /**
-     * Factory from env (works with vlucas/phpdotenv).
-     * Expected env:
-     *  DB_DSN="mysql:host=127.0.0.1;port=3306;dbname=devquest;charset=utf8mb4"
-     *  DB_USER="dev"
-     *  DB_PASS="secret"
-     */
+
     public static function fromEnv(): self
     {
         $dsn  = $_ENV['DB_DSN']  ?? '';
@@ -56,6 +50,17 @@ final class DbAccess
             }
         }
         return $this->pdo;
+    }
+
+    /** Quick connection test — returns true if connection works. */
+    public function testConnection(): bool
+    {
+        try {
+            $this->pdo(); // will throw if connection fails
+            return true;
+        } catch (\Throwable) {
+            return false;
+        }
     }
 
     /** Run a SELECT and get all rows. */

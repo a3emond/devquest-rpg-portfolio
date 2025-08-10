@@ -1,5 +1,18 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
+Dotenv\Dotenv::createImmutable(dirname(__DIR__))->safeLoad();
+
+use A3emond\Devquest\Database\DbAccess;
+
+$db = DbAccess::fromEnv();
+
+echo "<script>";
+if ($db->testConnection()) {
+    echo "console.log('%cDatabase connection successful', 'color: green; font-weight: bold;');";
+} else {
+    echo "console.error('%cDatabase connection failed', 'color: red; font-weight: bold;');";
+}
+echo "</script>";
 
 ?>
 
