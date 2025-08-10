@@ -106,15 +106,24 @@ export function renderSkillTree(containerId, jsonData, lang = "en") {
             d3.select(this).transition().duration(1500).attr("r", dropRadius + 4).transition().duration(1500).attr("r", dropRadius).on("end", repeat);
         });
 
+    const dropText = {
+        en : "Drop Here",
+        fr : "Déposez Ici"
+    }
     svg.append("text")
         .attr("x", dropX)
         .attr("y", dropY - dropRadius - 10)
         .attr("text-anchor", "middle")
-        .text("Drop Here")
+        .text(dropText[lang] || dropText.en)
         .style("fill", "#3CCA8F")
         .style("font-weight", "bold");
 
     // Title (above drop zone, but still under nodes/links)
+    const TitleText = {
+        en: "Skills",
+        fr: "Compétences"
+    };
+
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", 54)
@@ -125,7 +134,7 @@ export function renderSkillTree(containerId, jsonData, lang = "en") {
         .attr("fill", "#a17f1a")
         .attr("opacity", 0.33)
         .attr("pointer-events", "none")
-        .text("Skills");
+        .text(TitleText[lang] || TitleText.en);
 
     // Prepare nodes and links
     const nodes = jsonData.skills.map(skill => ({
@@ -272,7 +281,7 @@ export function renderSkillTree(containerId, jsonData, lang = "en") {
 
     function resetCard() {
         card.classed("active", false)
-            .html(`<p class="placeholder-text">➦ Drag a skill node into this card to see details</p>`);
+            .html(`<p class="placeholder-text">➦ Drag a skill node into the drop zone to see details</p>`); // legacy text injection
     }
 
     function ejectSkill(skill) {

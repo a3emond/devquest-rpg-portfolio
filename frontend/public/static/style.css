@@ -395,6 +395,52 @@
         font-size: 1.2rem;
         line-height: 1;
     }
+    /* === About Section: Mobile Fixes === */
+    @media (max-width: 768px) {
+        #about.section {
+            min-height: calc(100vh - var(--footer-height));
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        /* blur behind section */
+        #about.section {
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-grid {
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .about-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 0.25rem;
+        }
+
+        .about-buttons .btn {
+            width: 80%;
+            max-width: 300px;
+            font-size: 1rem;
+            background-color: var(--color-gold);
+            color: var(--color-bg);
+            box-shadow: 0 0 10px var(--color-gold);
+            border: 2px solid var(--color-gold);
+        }
+        .about-buttons .btn.outline {
+            background-color: var(--color-gold);
+            color: var(--color-bg);
+            box-shadow: 0 0 10px var(--color-gold);
+        }
+
+    }
 
 
     /* === Flip Card Carousel === */
@@ -695,7 +741,7 @@
         }
 
         .section {
-            padding-top: var(--header-height);
+            padding: 0 var(--section-gap);
             justify-content: flex-start;
             align-items: center;
             text-align: center;

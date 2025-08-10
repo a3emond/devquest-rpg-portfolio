@@ -1,3 +1,10 @@
+<?php
+require __DIR__ . '/../vendor/autoload.php';
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +42,6 @@
     <a href="#projects" data-i18n="nav.projects">Projects</a>
     <a href="#contact" data-i18n="nav.contact">Contact</a>
 </nav>
-
 <main class="snap-container">
     <section id="home" class="section narrow snap-child">
         <div class="section-inner">
