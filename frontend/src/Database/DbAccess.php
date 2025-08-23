@@ -6,6 +6,7 @@ namespace A3emond\Devquest\Database;
 use PDO;
 use PDOException;
 use RuntimeException;
+use Throwable;
 
 final class DbAccess
 {
@@ -58,7 +59,7 @@ final class DbAccess
         try {
             $this->pdo(); // will throw if connection fails
             return true;
-        } catch (\Throwable) {
+        } catch (Throwable) {
             return false;
         }
     }
@@ -114,7 +115,9 @@ final class DbAccess
         }
     }
 
-    /** Helper to run a closure inside a transaction. Rolls back on exception. */
+    /** Helper to run a closure inside a transaction. Rolls back on exception.
+     * @throws Throwable
+     */
     public function transactional(callable $fn): mixed
     {
         $this->begin();
@@ -122,7 +125,7 @@ final class DbAccess
             $result = $fn($this);
             $this->commit();
             return $result;
-        } catch (\Throwable $t) {
+        } catch (Throwable $t) {
             $this->rollback();
             throw $t;
         }

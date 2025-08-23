@@ -2,4 +2,4 @@
 /frontend/vendor/
 
 #shared section
-.env
+frontend/.env

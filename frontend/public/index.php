@@ -2,18 +2,12 @@
 require __DIR__ . '/../vendor/autoload.php';
 Dotenv\Dotenv::createImmutable(dirname(__DIR__))->safeLoad();
 
+// Database connection test
 use A3emond\Devquest\Database\DbAccess;
-
+use A3emond\Devquest\Utils\Utils;
 $db = DbAccess::fromEnv();
-
-echo "<script>";
-if ($db->testConnection()) {
-    echo "console.log('%cDatabase connection successful', 'color: green; font-weight: bold;');";
-} else {
-    echo "console.error('%cDatabase connection failed', 'color: red; font-weight: bold;');";
-}
-echo "</script>";
-
+$db->testConnection() ? Utils::consoleLog('Database connection successful', 'green', true) :
+    Utils::consoleLog('Database connection failed', 'red', true);
 ?>
 
 
