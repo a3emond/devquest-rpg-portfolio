@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace A3emond\Devquest\Database;
+namespace A3emond\Devquest\DatabaseUtils;
 
 use PDO;
 use PDOException;
