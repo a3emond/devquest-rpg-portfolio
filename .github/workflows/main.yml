@@ -16,10 +16,11 @@ jobs:
       - name: Set up SSH connection
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          cat <<'EOF' > ~/.ssh/id_ed25519
+          ${{ secrets.SSH_PRIVATE_KEY }}
+          EOF
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
-
 
       - name: Deploy frontend
         run: |
@@ -62,10 +63,3 @@ jobs:
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_API_PATH }}
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_CDN_PATH }}
           EOF
-
-      # - name: Run database migrations (future)
-      #   run: |
-      #     ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-      #       cd ${{ secrets.DEPLOY_API_PATH }}
-      #       php artisan migrate --force   # or doctrine:migrations:migrate
-      #     EOF
