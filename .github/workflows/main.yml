@@ -15,34 +15,34 @@ jobs:
 
       - name: Set up SSH connection
         run: |
-          mkdir -p ~/.ssh
-          cat <<'EOF' > ~/.ssh/id_ed25519
-          ${{ secrets.SSH_PRIVATE_KEY }}
-          EOF
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          mkdir -p $HOME/.ssh
+          cat <<'EOF' > $HOME/.ssh/id_ed25519
+${{ secrets.SSH_PRIVATE_KEY }}
+EOF
+          chmod 600 $HOME/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> $HOME/.ssh/known_hosts
 
       - name: Deploy frontend
         run: |
           rsync -avz --delete ./frontend/ \
-            -e "ssh -i ~/.ssh/id_ed25519" \
+            -e "ssh -i $HOME/.ssh/id_ed25519" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_FRONTEND_PATH }}
 
       - name: Deploy API
         run: |
           rsync -avz --delete ./api/ \
-            -e "ssh -i ~/.ssh/id_ed25519" \
+            -e "ssh -i $HOME/.ssh/id_ed25519" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_API_PATH }}
 
       - name: Deploy CDN assets
         run: |
           rsync -avz --delete ./assets/ \
-            -e "ssh -i ~/.ssh/id_ed25519" \
+            -e "ssh -i $HOME/.ssh/id_ed25519" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
 
       - name: Run Composer install (frontend)
         run: |
-          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -i $HOME/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd ${{ secrets.DEPLOY_FRONTEND_PATH }}
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
@@ -50,7 +50,7 @@ jobs:
 
       - name: Run Composer install (API)
         run: |
-          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -i $HOME/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd ${{ secrets.DEPLOY_API_PATH }}
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
@@ -58,7 +58,7 @@ jobs:
 
       - name: Fix ownership and permissions
         run: |
-          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -i $HOME/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_FRONTEND_PATH }}
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_API_PATH }}
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_CDN_PATH }}
