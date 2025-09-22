@@ -55,10 +55,10 @@ jobs:
             composer dump-autoload -o
           EOF
 
-      - name: Run Composer install (API)
-        run: |
-          ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd ${{ secrets.DEPLOY_API_PATH }}
-            composer install --no-interaction --prefer-dist --optimize-autoloader
-            composer dump-autoload -o
-          EOF
+      # - name: Run Composer install (API)
+      #   run: |
+      #     ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+      #       cd ${{ secrets.DEPLOY_API_PATH }}
+      #       composer install --no-interaction --prefer-dist --optimize-autoloader
+      #       composer dump-autoload -o
+      #     EOF
