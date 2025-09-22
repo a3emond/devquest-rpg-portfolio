@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy frontend
         run: |
-          rsync -avz --no-times --delete \
+          rsync -rltDz --delete \
             --exclude 'vendor/' \
             --exclude 'node_modules/' \
             ./frontend/ \
@@ -32,7 +32,7 @@ jobs:
 
       - name: Deploy API
         run: |
-          rsync -avz --no-times --delete \
+          rsync -rltDz --delete \
             --exclude 'vendor/' \
             --exclude 'node_modules/' \
             ./api/ \
@@ -41,7 +41,7 @@ jobs:
 
       - name: Deploy CDN assets
         run: |
-          rsync -avz --no-times --delete \
+          rsync -rltDz --delete \
             ./assets/ \
             -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
@@ -60,12 +60,4 @@ jobs:
             cd ${{ secrets.DEPLOY_API_PATH }}
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
-          EOF
-
-      - name: Fix ownership and permissions
-        run: |
-          ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            sudo chown -R www-data:www-data ${{ secrets.DEPLOY_FRONTEND_PATH }}
-            sudo chown -R www-data:www-data ${{ secrets.DEPLOY_API_PATH }}
-            sudo chown -R www-data:www-data ${{ secrets.DEPLOY_CDN_PATH }}
           EOF
