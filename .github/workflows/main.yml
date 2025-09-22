@@ -19,44 +19,47 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Add host key
-        run: ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
-
+        run: ssh-keyscan -p 50022 -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Deploy frontend
         run: |
           rsync -avz --delete ./frontend/ \
+            -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_FRONTEND_PATH }}
-
+      
       - name: Deploy API
         run: |
           rsync -avz --delete ./api/ \
+            -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_API_PATH }}
-
+      
       - name: Deploy CDN assets
         run: |
           rsync -avz --delete ./assets/ \
+            -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
-
+      
       - name: Run Composer install (frontend)
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd ${{ secrets.DEPLOY_FRONTEND_PATH }}
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
           EOF
-
+      
       - name: Run Composer install (API)
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd ${{ secrets.DEPLOY_API_PATH }}
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
           EOF
-
+      
       - name: Fix ownership and permissions
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_FRONTEND_PATH }}
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_API_PATH }}
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_CDN_PATH }}
           EOF
+      
