@@ -23,22 +23,29 @@ jobs:
 
       - name: Deploy frontend
         run: |
-          rsync -avz --delete ./frontend/ \
+          rsync -avz --no-times --delete \
+            --exclude 'vendor/' \
+            --exclude 'node_modules/' \
+            ./frontend/ \
             -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_FRONTEND_PATH }}
-      
+
       - name: Deploy API
         run: |
-          rsync -avz --delete ./api/ \
+          rsync -avz --no-times --delete \
+            --exclude 'vendor/' \
+            --exclude 'node_modules/' \
+            ./api/ \
             -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_API_PATH }}
-      
+
       - name: Deploy CDN assets
         run: |
-          rsync -avz --delete ./assets/ \
+          rsync -avz --no-times --delete \
+            ./assets/ \
             -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
-      
+
       - name: Run Composer install (frontend)
         run: |
           ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
@@ -46,7 +53,7 @@ jobs:
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
           EOF
-      
+
       - name: Run Composer install (API)
         run: |
           ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
@@ -54,7 +61,7 @@ jobs:
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
           EOF
-      
+
       - name: Fix ownership and permissions
         run: |
           ssh -p 50022 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
@@ -62,4 +69,3 @@ jobs:
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_API_PATH }}
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_CDN_PATH }}
           EOF
-      
