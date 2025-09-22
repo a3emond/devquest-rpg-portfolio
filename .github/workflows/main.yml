@@ -16,7 +16,7 @@ jobs:
       - name: Set up SSH connection
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
@@ -37,7 +37,7 @@ jobs:
 
       - name: Run Composer install (frontend)
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd ${{ secrets.DEPLOY_FRONTEND_PATH }}
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
@@ -45,7 +45,7 @@ jobs:
 
       - name: Run Composer install (API)
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd ${{ secrets.DEPLOY_API_PATH }}
             composer install --no-interaction --prefer-dist --optimize-autoloader
             composer dump-autoload -o
@@ -53,7 +53,7 @@ jobs:
 
       - name: Fix ownership and permissions
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_FRONTEND_PATH }}
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_API_PATH }}
             sudo chown -R www-data:www-data ${{ secrets.DEPLOY_CDN_PATH }}
@@ -61,7 +61,7 @@ jobs:
 
       # - name: Run database migrations (future)
       #   run: |
-      #     ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+      #     ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
       #       cd ${{ secrets.DEPLOY_API_PATH }}
       #       php artisan migrate --force   # or doctrine:migrations:migrate
       #     EOF
