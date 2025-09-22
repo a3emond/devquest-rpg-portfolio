@@ -22,25 +22,46 @@ jobs:
 
       - name: Deploy frontend
         run: |
-          rsync -avz ./frontend/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_FRONTEND_PATH }}
+          rsync -avz --delete ./frontend/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_FRONTEND_PATH }}
 
       - name: Deploy API
         run: |
-          rsync -avz ./api/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_API_PATH }}
+          rsync -avz --delete ./api/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_API_PATH }}
 
       - name: Deploy CDN assets
         run: |
-          rsync -avz ./assets/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
+          rsync -avz --delete ./assets/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
 
-      - name: Run Composer install and autoload dump (frontend in Docker)
+      - name: Run Composer install (frontend)
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            docker exec ${{ secrets.DOCKER_CONTAINER_NAME }} sh -c "cd ${{ secrets.CONTAINER_FRONTEND_PATH }} && composer install --no-interaction --prefer-dist --optimize-autoloader && composer dump-autoload -o"
+            cd ${{ secrets.DEPLOY_FRONTEND_PATH }}
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            composer dump-autoload -o
           EOF
 
-      # - name: Run Composer install and autoload dump (API in Docker - future use)
+      - name: Run Composer install (API)
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd ${{ secrets.DEPLOY_API_PATH }}
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            composer dump-autoload -o
+          EOF
+
+      - name: Fix ownership and permissions
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            sudo chown -R www-data:www-data ${{ secrets.DEPLOY_FRONTEND_PATH }}
+            sudo chown -R www-data:www-data ${{ secrets.DEPLOY_API_PATH }}
+            sudo chown -R www-data:www-data ${{ secrets.DEPLOY_CDN_PATH }}
+          EOF
+
+      # - name: Run database migrations (future)
       #   run: |
       #     ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-      #       docker exec ${{ secrets.DOCKER_CONTAINER_NAME }} sh -c "cd ${{ secrets.CONTAINER_API_PATH }} && composer install --no-interaction --prefer-dist --optimize-autoloader && composer dump-autoload -o"
+      #       cd ${{ secrets.DEPLOY_API_PATH }}
+      #       php artisan migrate --force   # or doctrine:migrations:migrate
       #     EOF
-
