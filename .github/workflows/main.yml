@@ -13,42 +13,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Debugging step: confirm secrets are passed
-      - name: Debug secrets presence
-        run: |
-          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
-            echo "❌ SSH_PRIVATE_KEY is NOT set!"
-            exit 1
-          else
-            echo "✅ SSH_PRIVATE_KEY is set (hidden)."
-          fi
-          if [ -z "${{ secrets.SSH_HOST }}" ]; then
-            echo "❌ SSH_HOST is NOT set!"
-            exit 1
-          else
-            echo "✅ SSH_HOST is set: ${{ secrets.SSH_HOST }}"
-          fi
-          if [ -z "${{ secrets.SSH_USER }}" ]; then
-            echo "❌ SSH_USER is NOT set!"
-            exit 1
-          else
-            echo "✅ SSH_USER is set: ${{ secrets.SSH_USER }}"
-          fi
-
       - name: Set up SSH connection
         run: |
           mkdir -p ~/.ssh
-          # Write private key safely
-          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          # Write the key exactly as in secrets
+          cat > ~/.ssh/id_ed25519 <<'EOF'
+          ${{ secrets.SSH_PRIVATE_KEY }}
+          EOF
+          # Fix permissions so OpenSSH accepts it
           chmod 600 ~/.ssh/id_ed25519
-
-          # Debugging: confirm file exists and permissions
+      
+          # Debugging: confirm perms and fingerprint
           ls -l ~/.ssh/id_ed25519
-          head -n 2 ~/.ssh/id_ed25519   # Only print first 2 lines (BEGIN + 1 line)
-
-          # Add host to known_hosts
+          ssh-keygen -lf ~/.ssh/id_ed25519 || true
+      
+          # Add host key
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
-          echo "✅ SSH key and known_hosts configured"
+      
 
       - name: Deploy frontend
         run: |
