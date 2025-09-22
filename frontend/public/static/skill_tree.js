@@ -6,6 +6,14 @@ import { getCurrentLang, onLangChange } from './lang.js';
 let currentData = null;
 let currentLang = getCurrentLang();
 
+// color dictionary
+let colors = {
+    black : "#000000",
+    white : "#ffffff",
+    green : "#3CCA8F"
+}
+
+
 window.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch("static/full_skill_tree.json");
@@ -13,7 +21,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         currentData = await response.json();
         renderSkillTree("skill-tree", currentData, currentLang);
     } catch (err) {
-        console.error("❌ Failed to load skill tree JSON:", err);
+        console.error(" Failed to load skill tree JSON:", err);
     }
 });
 
@@ -72,7 +80,7 @@ export function renderSkillTree(containerId, jsonData, lang = "en") {
         .attr("height", height)
         .attr("viewBox", [0, 0, width, height])
         .attr("id", "skill-svg")
-        .style("background", "rgba(122, 117, 77, 0.45)")
+        .style("background", "rgba(0, 0, 0, 0.45)")
         .style("border", "2px solid #a17f1a")
         .style("border-radius", "12px")
         .style("backdrop-filter", "blur(6px)")
@@ -131,7 +139,7 @@ export function renderSkillTree(containerId, jsonData, lang = "en") {
         .attr("font-size", "44px")
         .attr("font-family", "sans-serif")
         .attr("font-weight", "bold")
-        .attr("fill", "#a17f1a")
+        .attr("fill", "#000000")
         .attr("opacity", 0.33)
         .attr("pointer-events", "none")
         .text(TitleText[lang] || TitleText.en);
@@ -166,7 +174,7 @@ export function renderSkillTree(containerId, jsonData, lang = "en") {
 
     // Draw links (above drop zone)
     const link = svg.append("g")
-        .attr("stroke", "#a17f1a")
+        .attr("stroke", colors.green)
         .attr("stroke-width", 1.5)
         .selectAll("line")
         .data(links)
@@ -174,7 +182,7 @@ export function renderSkillTree(containerId, jsonData, lang = "en") {
 
     // Draw nodes (above links and drop zone)
     const node = svg.append("g")
-        .attr("stroke", "#d4af37")
+        .attr("stroke", colors.green)
         .attr("stroke-width", 1)
         .selectAll("g")
         .data(nodes)

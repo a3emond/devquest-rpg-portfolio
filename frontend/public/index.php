@@ -98,18 +98,18 @@ $db->testConnection() ? Utils::consoleLog('Database connection successful', 'gre
         <div class="section-inner">
             <div class="section-content">
                 <h2 data-i18n="sections.projects.title">Projects</h2>
-                <div class="flip-carousel">
-                    <div class="flip-card" id="flipCard">
-                        <div class="flip-card-inner" id="cardInner">
-                            <div class="flip-card-front" id="cardFront"></div>
-                            <div class="flip-card-back" id="cardBack"></div>
-                        </div>
-                        <button class="flip-hint-btn" id="manualFlipBtn">↻</button>
-                    </div>
-                    <div class="carousel-controls">
-                        <div class="flip-dots" id="dotsContainer"></div>
-                    </div>
-                </div>
+<!--                <div class="flip-carousel">-->
+<!--                    <div class="flip-card" id="flipCard">-->
+<!--                        <div class="flip-card-inner" id="cardInner">-->
+<!--                            <div class="flip-card-front" id="cardFront"></div>-->
+<!--                            <div class="flip-card-back" id="cardBack"></div>-->
+<!--                        </div>-->
+<!--                        <button class="flip-hint-btn" id="manualFlipBtn">↻</button>-->
+<!--                    </div>-->
+<!--                    <div class="carousel-controls">-->
+<!--                        <div class="flip-dots" id="dotsContainer"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </section>
