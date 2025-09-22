@@ -13,26 +13,59 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Debugging step: confirm secrets are passed
+      - name: Debug secrets presence
+        run: |
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+            echo "❌ SSH_PRIVATE_KEY is NOT set!"
+            exit 1
+          else
+            echo "✅ SSH_PRIVATE_KEY is set (hidden)."
+          fi
+          if [ -z "${{ secrets.SSH_HOST }}" ]; then
+            echo "❌ SSH_HOST is NOT set!"
+            exit 1
+          else
+            echo "✅ SSH_HOST is set: ${{ secrets.SSH_HOST }}"
+          fi
+          if [ -z "${{ secrets.SSH_USER }}" ]; then
+            echo "❌ SSH_USER is NOT set!"
+            exit 1
+          else
+            echo "✅ SSH_USER is set: ${{ secrets.SSH_USER }}"
+          fi
+
       - name: Set up SSH connection
         run: |
           mkdir -p ~/.ssh
+          # Write private key safely
           printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+
+          # Debugging: confirm file exists and permissions
+          ls -l ~/.ssh/id_ed25519
+          head -n 2 ~/.ssh/id_ed25519   # Only print first 2 lines (BEGIN + 1 line)
+
+          # Add host to known_hosts
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          echo "✅ SSH key and known_hosts configured"
 
       - name: Deploy frontend
         run: |
           rsync -avz --delete ./frontend/ \
+            -e "ssh -i ~/.ssh/id_ed25519" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_FRONTEND_PATH }}
 
       - name: Deploy API
         run: |
           rsync -avz --delete ./api/ \
+            -e "ssh -i ~/.ssh/id_ed25519" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_API_PATH }}
 
       - name: Deploy CDN assets
         run: |
           rsync -avz --delete ./assets/ \
+            -e "ssh -i ~/.ssh/id_ed25519" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
 
       - name: Run Composer install (frontend)
