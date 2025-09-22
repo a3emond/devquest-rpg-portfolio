@@ -16,20 +16,18 @@ jobs:
       - name: Set up SSH connection
         run: |
           mkdir -p ~/.ssh
-          # Write the key exactly as in secrets
-          cat > ~/.ssh/id_ed25519 <<'EOF'
+          # Write the key exactly as stored in GitHub secret (no extra spaces)
+          cat > ~/.ssh/id_ed25519 <<EOF
           ${{ secrets.SSH_PRIVATE_KEY }}
           EOF
-          # Fix permissions so OpenSSH accepts it
           chmod 600 ~/.ssh/id_ed25519
-      
-          # Debugging: confirm perms and fingerprint
-          ls -l ~/.ssh/id_ed25519
+          
+          # Debugging: confirm file exists and fingerprint (will not fail step)
+          ls -l ~/.ssh/id_ed25519 || true
           ssh-keygen -lf ~/.ssh/id_ed25519 || true
-      
-          # Add host key
+
+          # Add host to known_hosts
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
-      
 
       - name: Deploy frontend
         run: |
