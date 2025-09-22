@@ -23,28 +23,29 @@ jobs:
 
       - name: Deploy frontend
         run: |
-          rsync -rltDz --delete \
+          rsync -avz --no-times --no-perms --no-owner --no-group --delete \
             --exclude 'vendor/' \
             --exclude 'node_modules/' \
             ./frontend/ \
             -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_FRONTEND_PATH }}
-
+      
       - name: Deploy API
         run: |
-          rsync -rltDz --delete \
+          rsync -avz --no-times --no-perms --no-owner --no-group --delete \
             --exclude 'vendor/' \
             --exclude 'node_modules/' \
             ./api/ \
             -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_API_PATH }}
-
+      
       - name: Deploy CDN assets
         run: |
-          rsync -rltDz --delete \
+          rsync -avz --no-times --no-perms --no-owner --no-group --delete \
             ./assets/ \
             -e "ssh -p 50022" \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_CDN_PATH }}
+
 
       - name: Run Composer install (frontend)
         run: |
